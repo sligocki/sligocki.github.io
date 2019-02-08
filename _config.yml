@@ -2,9 +2,7 @@
 permalink:           pretty
 
 # Setup
-title:               Poole
-tagline:             The Jekyll Butler
-url:                 http://getpoole.com
+title:               sligocki
 paginate:            1
 baseurl:             ""
 
@@ -17,16 +15,10 @@ sass:
 
 # About/contact
 author:
-  name:              Mark Otto
-  url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
-
-# Custom vars
-version:             2.0.0
-github:
-  repo:              https://github.com/poole/poole
+  name:              Shawn Ligocki
+  email:             sligocki@gmail.com
 
 # Gems
 plugins:
   - jekyll-paginate
-  - jekyll-gist
+
