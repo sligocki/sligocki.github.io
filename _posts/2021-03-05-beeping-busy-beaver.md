@@ -48,7 +48,7 @@ Has this new TM (Y) already quasihalted after it's first step? If it has, then t
 
 OK, so clearly quasihalting is more _complicated_ than halting, but is it more _powerful_? What does it even mean to be more powerful? Well, for normal TMs, we say that they compute a function if, for any input `n` they can write `f(n)` on the tape and then halt. Any function `f` which can be computed by a TM is said to be **computable**. Famously, the Busy Beaver function is not computable and, in fact, it grows faster than any computable function. Reasoning about tape contents is a bit annoying and runtime is often more useful. So consider a TM that which given input `n` runs for `g(n)` steps and then halts. It can be shown that this `g` is also a computable function.
 
-So then, let us call a function `h` "quasicomputable" if there exists a TM which when given input `n` runs for `h(n)` steps and then quasihalts. Is quasicomputablity stronger than computability? Yes! In fact, the classic Busy Beaver function is quasicomputable! (or to be a bit more technical, it is dominated by a quasicomputable function.)
+So then, let us say that a function `h` is "quasicomputable" if there exists a TM which when given input `n` runs for `h(n)` steps and then quasihalts. Is quasicomputablity stronger than computability? Yes! In fact, the classic Busy Beaver function is quasicomputable! (or to be a bit more technical, it is dominated by a quasicomputable function.)
 
 Here is the algorithm for quasicomputing the Busy Beaver function:
 * Given an input `n`, enumerate all `n`-state 2-symbol Turing machines onto subsections of the tape.
@@ -56,6 +56,11 @@ Here is the algorithm for quasicomputing the Busy Beaver function:
 * Whenever any of the simulated TMs halts, enter the beeping state and continue with the other TMs.
 
 So, this program will beep exactly once for every `n`-state TM that halts. And, as we know, there are only a finite number of `n`-state halting TMs. Therefore, this program will only beep a finite number of times and thus it quasihalts! But how many steps does it run before halting? Well to know the exact number would require me to give a much more detailed description, but for sure it will run for more steps than every single one of the halting `n`-state TMs runs for (because it is simulating every one of those steps before quasihalting). So this program computes a function `h(n) > BB(n)`. And thus we can see that quasicomputablity is stronger than computability (because `BB(n)` grows faster than any computable function)! Perhaps we should have called it "hyper-computability".
+
+
+## Future work
+
+This demonstration that the Busy Beaver function is quasicomputable seems very powerful, but we have still not completely shown that BBB(n) grows at the same rate as BB<sub>1</sub>(n) (the oracle-Busy Beaver). Likewise, Scott mentions in a footnote that we could have defined a similar function for Nondeterministic TMs and that that function would also grow at the same rate. In a future post I plan to dig into those comparisons.
 
 
 ## Footnotes
