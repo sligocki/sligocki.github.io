@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Beeping Busy Beaver
+tag: busy-beaver
 ---
 
 As a long time [Busy Beaver](https://en.wikipedia.org/wiki/Busy_beaver) enthusiast, I was very excited when I heard that Scott Aaronson published a [Busy Beaver survey](https://www.scottaaronson.com/blog/?p=4916) last September.<sup id="t1">[1](#f1)</sup> There are many exciting ideas and conjectures within it, but the one that has stuck with me the most was his proposed "Beeping Busy Beaver" function BBB(n). Quoting from the paper:
