@@ -18,3 +18,5 @@ But there are more complex questions you could answer with a network as well. [F
 * How important are individual people or connections? How does removing a person or a connection degrade the network (disconnect people, increase average distance, etc.)?
 
 These are all questions that can be answered by analyzing the network directly and there is a whole field of Network Theory built around answering these types of questions. Of course, before you start, you need access to the full database in order to build such a network. Luckily, WikiTree is run on a very open data model and so you can easily apply for access to weekly [Data Dumps](https://www.wikitree.com/wiki/Help:Database_Dumps). Over the last several years, I've spent evenings and weekends analyzing these data dumps, producing networks and learning Network Theory in order to try and figure out what interesting things I can say about the WikiTree Network. In future posts, I will share some of the discoveries I've made and difficulties I've run into along the way.
+
+(Comments and discussion at [WikiTree G2G](https://www.wikitree.com/g2g/1258039/wikitree-and-network-theory))
