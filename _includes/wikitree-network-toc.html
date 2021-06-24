@@ -1,0 +1,10 @@
+This article is part of a series on the WikiTree Network:
+{% for post in site.posts reversed %}
+  {% if post.tags contains "wikitree_network" %}
+    {% if post.url == page.url %}
+1. **{{post.title}}**
+    {% else %}
+1. [{{post.title}}]({{post.url}})
+    {% endif %}
+  {% endif %}
+{% endfor %}
