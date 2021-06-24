@@ -91,6 +91,7 @@ Likewise, if my Family Network was identical to this new Projected Family Networ
 
 ---------
 
+(Comments and discussion at [WikiTree G2G](https://www.wikitree.com/g2g/1259092/wikitree-network-corner-cases))
 
 ---------
 
