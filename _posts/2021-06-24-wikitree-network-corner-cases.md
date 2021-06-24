@@ -1,6 +1,7 @@
 ---
 layout: post
 title: WikiTree Network Corner Cases
+date: 2021-06-24 19:00:00 -04:00
 tags: wikitree_network
 ---
 
@@ -90,7 +91,6 @@ Likewise, if my Family Network was identical to this new Projected Family Networ
 
 ---------
 
-(Comments and discussion at [WikiTree G2G]())
 
 ---------
 
