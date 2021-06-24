@@ -1,7 +1,7 @@
 ---
 layout: post
 title: The WikiTree Network Definition
-tags: networks genealogy
+tags: wikitree_network
 ---
 
 In my [last post]({% post_url 2021-06-23-wikitree-and-network-theory %}), I discussed the motivation for applying Network Theory towards analyzing the WikiTree genealogy database. In this post, I will discus the nitty-gritty details about how to define such a network. In fact, I have come up with 3 different ways for defining such a network each of which has it's own advantages and disadvantages.
@@ -59,4 +59,10 @@ Con:
 
 Thanks for sticking with me through the details! In the next post, I'll share the first exciting discovery I've made which wouldn't have been possible without having these networks in mind.
 
+---------
+
 (Comments and discussion at [WikiTree G2G](https://www.wikitree.com/g2g/1258747/wikitree-network-defined))
+
+---------
+
+{% include wikitree-network-toc.html %}
