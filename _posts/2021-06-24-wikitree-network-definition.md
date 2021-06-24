@@ -48,7 +48,7 @@ The Person nodes don't seem to be adding much information in the Bipartite Netwo
 
 This network has 7.3M nodes and 7.8M edges.
 
-Pros:
+Pro:
 * This network is **dramatically** smaller and simpler. It has 1/3 as many nodes and 1/15 as many edges as the original Person Network! I almost feel embarrassed about drawing such a small network, it feels like I should have tried to represent a larger family. So this visualization allows us to represent a lot more content in a smaller space!
 
 Con:
