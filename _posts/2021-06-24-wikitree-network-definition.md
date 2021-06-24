@@ -50,7 +50,6 @@ This network has 7.3M nodes and 7.8M edges.
 
 Pros:
 * This network is **dramatically** smaller and simpler. It has 1/3 as many nodes and 1/15 as many edges as the original Person Network! I almost feel embarrassed about drawing such a small network, it feels like I should have tried to represent a larger family. So this visualization allows us to represent a lot more content in a smaller space!
-* This network seems to represent the things which are most important to WikiTree network connectivity. Specifically, it completely excludes people who never marry or have children because these people do not affect the connectivity of the network.
 
 Con:
 * Of all the networks I've discussed here, I think this one might be the least intuitive to interpret and explain. Without the Person nodes, you sort of have to re-orient your mind to thinking about family units as objects (nodes) and people as the connections (edges).
