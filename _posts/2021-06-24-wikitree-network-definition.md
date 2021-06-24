@@ -46,7 +46,7 @@ Cons:
 
 The Person nodes don't seem to be adding much information in the Bipartite Network image above. They mostly just seem to either connect to two Family nodes (if we know their parents and they were married or had children) or to a single Family node (if they never wed/had children or we don't know their parents). It seems like the Family nodes are really representing most of the interesting connectivity in this tree. So, what if we built a network with only Family nodes? Since we no longer have Person nodes, I have labeled each Family node with the people it represents (2 parents/spouses at top, children at bottom). Now, how do we draw edges on this network? For every person, we connect their childhood Family node to their adult Family node (if they ever marry/have children).
 
-This network has 7.3M nodes and 7.8M edges.
+This network has 7.6M nodes and 8.1M edges.
 
 Pro:
 * This network is **dramatically** smaller and simpler. It has 1/3 as many nodes and 1/15 as many edges as the original Person Network! I almost feel embarrassed about drawing such a small network, it feels like I should have tried to represent a larger family. So this visualization allows us to represent a lot more content in a smaller space!
