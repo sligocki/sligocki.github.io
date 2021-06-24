@@ -58,3 +58,5 @@ Con:
 ## Closing thoughts
 
 Thanks for sticking with me through the details! In the next post, I'll share the first exciting discovery I've made which wouldn't have been possible without having these networks in mind.
+
+(Comments and discussion at [WikiTree G2G](https://www.wikitree.com/g2g/1258747/wikitree-network-defined))
