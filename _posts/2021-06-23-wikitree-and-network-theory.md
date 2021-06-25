@@ -4,7 +4,7 @@ title: WikiTree and Network Theory
 tags: wikitree_network
 ---
 
-About 3 years ago, I became interested in genealogy research and soon after discovered [WikiTree](https://www.wikitree.com/). WikiTree is a wonderful community of genealogists who collaborate to build and improve a single, shared family tree for all of humanity. At it's core is a user-built database of 27 million profiles, each representing a person (users and ancestors) and containing a biography; vital record (birth, death and marriage) details; and connections to family members (parents, children, spouses and siblings).
+About 3 years ago, I became interested in genealogy research and soon after discovered [WikiTree](https://www.wikitree.com/). WikiTree is a wonderful community of genealogists who collaborate to build and improve a single, shared family tree for all of humanity. At its core is a user-built database of 27 million profiles, each representing a person (users and ancestors) and containing a biography; vital record (birth, death and marriage) details; and connections to family members (parents, children, spouses and siblings).
 
 As a Mathematician, I quickly became very interested in thinking about this dataset as a [mathematical graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)) (or what is more commonly known these days as a [network](https://en.wikipedia.org/wiki/Network_theory)). For example, we could consider each profile to be a node and connect nodes together with an edge if they are direct family members (parent-child, spouse or sibling relationships, for example).
 

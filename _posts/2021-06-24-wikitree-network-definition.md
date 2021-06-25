@@ -5,7 +5,7 @@ date: 2021-06-24 02:00:00 -04:00
 tags: wikitree_network
 ---
 
-In my [last post]({% post_url 2021-06-23-wikitree-and-network-theory %}), I discussed the motivation for applying Network Theory towards analyzing the WikiTree genealogy database. In this post, I will discus the nitty-gritty details about how to define such a network. In fact, I have come up with 3 different ways for defining such a network each of which has it's own advantages and disadvantages.
+In my [last post]({% post_url 2021-06-23-wikitree-and-network-theory %}), I discussed the motivation for applying Network Theory towards analyzing the WikiTree genealogy database. In this post, I will discus the nitty-gritty details about how to define such a network. In fact, I have come up with 3 different ways for defining such a network each of which has its own advantages and disadvantages.
 
 Perhaps this does not sound very interesting? "I was promised exciting discoveries not nitty-gritty network definitions!" you might say. Well, I promise, the discoveries are coming! Stick with me through this adventure because I've discovered that these details make a big difference on the analysis!
 
