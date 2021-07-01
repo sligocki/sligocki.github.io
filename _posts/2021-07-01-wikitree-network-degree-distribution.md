@@ -89,6 +89,8 @@ So could it be that the WikiTree Person Network is being created by some sort of
 
 ---------
 
+(Comments and discussion at [WikiTree G2G](https://www.wikitree.com/g2g/1262580/network-degree-distribution))
+
 ---------
 
 {% include wikitree-network-toc.html %}
