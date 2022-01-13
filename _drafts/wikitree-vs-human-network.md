@@ -11,6 +11,7 @@ Why should we care about the [WikiTree Network]({% post_url 2021-06-24-wikitree-
 I will call this complete web of humanity, the "Human Kinship Network". Now, we can go ahead and define a new version of each of the networks we [defined for the WikiTree Network]({% post_url 2021-06-24-wikitree-network-definition %}). We could create a Complete Person Network, a Complete Bipartite Network and a Complete Family Network
 
 
+
 ...
 
 
