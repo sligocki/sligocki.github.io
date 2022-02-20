@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Collatz-like behavior of Busy Beavers
-tag: busy-beaver
+tags: busy-beaver collatz
 ---
 
 Nick Drozd just [announced](https://nickdrozd.github.io/2021/07/11/self-cleaning-turing-machine.html) a new 4x2 [Beeping Busy Beaver]({% post_url 2021-03-06-beeping-busy-beaver %}) champion (`BBB(4, 2)`). This is a 4-state, 2-symbol Turing Machine which runs for **32,779,478** steps only to produce a blank tape and then run off to left forever in state `C`. As far as I can tell, the previous record for `BBB(4, 2)` was 66,349, so this is quite an improvement!
