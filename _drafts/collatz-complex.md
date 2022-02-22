@@ -30,7 +30,7 @@ This analysis will be built around a common configuration:
 
 <code>... 1<sup>n</sup> <E 1<sup>m</sup> 0<sup>∞</sup></code>
 
-which appears again and again as this TM runs. Note that this is only a partial tape specification, there could be many different patterns in the `...` section (we'll dig more into that later). As a shorthand, we will denote this partial configuration as:
+which appears again and again as this TM runs. Note that this is only a partial tape specification, there could be many different patterns in the `...` section (we'll dig more into that later in the "Remainder Rules" section). As a shorthand, we will denote this partial configuration as:
 
 <code>f(n, m) = 1<sup>n</sup> <E 1<sup>m</sup> 0<sup>∞</sup></code>
 
@@ -138,7 +138,7 @@ Proof:
 
 |     Step # |         Left tape |   State   | Right tape                  |
 | ---------: | ----------------: | :-------: | :-------------------------- |
-|          0 | 0 | <b><E</b> | 1<sup>m</sup> 0<sup>∞</sup> |
+|          0 | `0` | <b><E</b> | 1<sup>m</sup> 0<sup>∞</sup> |
 |          1 |   | <b><E</b> | 1<sup>m+1</sup> 0<sup>∞</sup> |
 
 As a result, notice that this means that if we are in configuration:
@@ -216,10 +216,85 @@ Starting from this point the orbit of the Collatz function is:
 |         2261 | g(0, 3, ~2.4 × 10<sup>251</sup>) |
 |         2262 | Quasihalt |
 
-## Twin Machine
+In other words, we iterate this function `2262` times before the machine Quasihalts.
 
+## Intuition
 
+In a way, I am done now. I have given you a precise Collatz-like function which exactly simulates this TM ... but what is really going on here? In general, it feels like the value of having a Collatz analysis is that it sheds some light on what the TM is "actually doing". But (at least for me) seeing the definition of this `g` and the 2262 iterations it takes to Quasihalt is not especially illuminating. Instead I actually find the definition of `f` to be more helpful in understanding what this machine "does". Let me restate the `f` rules in yet another way:
 
-## Orbits Collide
+* `f(3k + r, m)` -> `f(r, m + 5k)`
+* `0 f(1, m)` -> `10 f(m, 2)`
+* `?0 f(2, m)` -> `010 f(m+1, 2)` (for `?` either `0` or `1`)
+* <code>0 1<sup>a</sup> 0<sup>b</sup> f(0, m)</code> -> `0 f(a, m+b)`
+* <code>0<sup>∞</sup> f(0, m)</code> -> Quasihalt
 
-A surprisingly large number of orbits of `g` collide into the same one that started with `(0, 1, 3)`
+So, we repeatedly iterate a Collatz-like function on `(n, m)` doing something different with the left side of the tape depending on the remainder of `n` mod 3. If the remainder is `1` or `2`, then we expand the size of the left side of the tape by 1 symbol (`0 -> 10` or `?0 -> 010`). If the remainder is `0`, then we reduce the size of the left side of the tape. In order to quasihalt, the TM must reduce the left side of the tape down to empty and then have a remainder of `0`. The question is, will the left side of the tape be reduced to empty and have remainder `0` for `n`? Or will it grow endlessly?
+
+By looking at the details of this specific orbit, it appears that these two forces (growth and reduction) are pretty evenly balanced. The tape grows a lot at first and then stays long for thousands of iterations before finally crashing down to empty.
+
+See here, for example, where I show only the iterations where `n < 3` (just the remainder).
+
+| Iteration # | Left Tape | n | m |
+| -: | -: | -: | -: |
+| 0 |  | 1 | 3 |
+| 1 | `1` | 0 | 7 |
+| 2 |  | 1 | 8 |
+| 3 | `1` | 2 | 12 |
+| 4 | `01` | 1 | 22 |
+| 5 | `011` | 1 | 37 |
+| 6 | `0111` | 1 | 62 |
+| 7 | `01111` | 2 | 102 |
+| 8 | `011101` | 1 | 172 |
+| 9 | `0111011` | 1 | 287 |
+| 10 | `01110111` | 2 | 477 |
+| 11 | `011101101` | 1 | 797 |
+| 12 | `0111011011` | 2 | 1327 |
+| 13 | `01110110101` | 2 | 2212 |
+| 14 | `011101101001` | 2 | 3687 |
+| 15 | `0111011010001` | 1 | 6147 |
+| 16 | `01110110100011` | 0 | 10247 |
+| 17 | `01110110100` | 2 | 10248 |
+| 18 | `011101101001` | 1 | 17082 |
+| 19 | `0111011010011` | 0 | 28472 |
+| 20 | `0111011010` | 2 | 28473 |
+| 21 | `01110110101` | 1 | 47457 |
+| 22 | `011101101011` | 0 | 79097 |
+| 23 | `011101101` | 2 | 79098 |
+| 24 | `0111011001` | 1 | 131832 |
+| 25 | `01110110011` | 0 | 219722 |
+| 26 | `01110110` | 2 | 219723 |
+| 27 | `011101101` | 1 | 366207 |
+| 28 | `0111011011` | 0 | 610347 |
+| 29 | `0111011` | 2 | 610348 |
+| 30 | `01110101` | 2 | 1017247 |
+| 31 | `011101001` | 2 | 1695412 |
+| 32 | `0111010001` | 2 | 2825687 |
+| 33 | `01110100001` | 0 | 4709482 |
+| 34 | `011101000` | 1 | 4709483 |
+| 35 | `0111010001` | 2 | 7849137 |
+| 36 | `01110100001` | 1 | 13081897 |
+| 37 | `011101000011` | 1 | 21803162 |
+| 38 | `0111010000111` | 2 | 36338602 |
+| 39 | `01110100001101` | 2 | 60564337 |
+| 40 | `011101000011001` | 2 | 100940562 |
+| ...| ...| ... | ... |
+| 1498 | `011101101001010001` | 2 | |
+| 1499 | `0111011010010100001` | 1 | |
+| 1500 | `01110110100101000011` | 1 | |
+| 1501 | `011101101001010000111` | 0 | |
+| 1502 | `01110110100101000` | 0 | |
+| 1503 | `011101101001` | 1 | |
+| 1504 | `0111011010011` | 0 | |
+| 1505 | `0111011010` | 2 | |
+| 1506 | `01110110101` | 0 | |
+| 1507 | `011101101` | 1 | |
+| 1508 | `0111011011` | 1 | |
+| 1509 | `01110110111` | 1 | |
+| 1510 | `011101101111` | 0 | |
+| 1511 | `0111011` | 1 | |
+| 1512 | `01110111` | 2 | |
+| 1513 | `011101101` | 0 | |
+| 1514 | `0111011` | 1 | |
+| 1515 | `01110111` | 0 | |
+| 1516 | `0111` | 0 | |
+| 1517 | `` | 0 | |
