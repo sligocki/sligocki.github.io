@@ -102,7 +102,7 @@ Lin Recurrence is an extremely common behavior (at least for small TMs). Lin use
 
 It is also worth noting that Chain Recurrence is actually the same thing as Lin Recurrence with period 1. So you could consider Lin Recurrence to be an extension of Chain Recurrence or Chain Recurrence to be a special-case of Lin Recurrence.
 
-# Proof System (PA-CTR) Recurrence
+### Proof System (PA-CTR) Recurrence
 
 Finally, the most complicated form of recurrence is one that I will call "PA-CTR Recurrence" or "Proof System Recurrence". This is one special case of a technique that I first learned from Heiner Marxen through personal communication in 2006 and 2008. I believe he calls the technique "pure additive configuration transitions" (PA-CTRs) and you can see examples on his [Busy Beaver Simulations](http://turbotm.de/~heiner/BB/bbsimtab.html) page. I've also previously described this technique calling it [Rule Steps]({% post_url 2021-07-17-bb-collatz %}#rule-step).
 
@@ -110,11 +110,11 @@ A Proof System Rule is a transition rule which applies to an entire class of tap
 
 <code>0<sup>inf</sup> <b><C</b> 0<sup>a</sup> 2<sup>b+1</sup> ...</code> → <code>0<sup>inf</sup> <b><C</b> 0<sup>a+2</sup> 2<sup>b</sup> ...</code> in `2a + 3` steps.
 
-Note that the common convention for this rule notation is that it applies for all values of all variables `>= 0`. In other words, this rule applies if there are any number (or no) `0`s followed by at least 1 `2` on the right half-tape.
+Note that the common convention for this rule notation is that it applies for all values of all variables `≥0`. In other words, this rule applies if there are any number (or no) `0`s followed by at least 1 `2` on the right half-tape.
 
 This rule is a common type of rule that we can prove. Specifically, it is a "pure additive configuration transition" (PA-CTR) in Marxen's nomenclature. The "pure additive" part means that the configuration before and after are the same except that some exponents change by adding (or subtracting) a constant value. In this case, `a → a + 2` and `b + 1 → b`. PA-CTRs have the advantage that we can accelerate repeated application down into a single simulator step. See, ex: "Rule 1x" and "Rule 2x" in the previously mentioned BBB(3,3) champion article.
 
-But even simpler is the situation where a PA-CTR increases all exponents. In that case, it will apply again and again and again and never stop. Effectively, this machine has entered into a recurrence as detected by PA-CTR Rule Steps. An example is the [third machine]({% post_url bbb-5-2-search-results %}#a-machine-with-slightly-more-complex-quasihalting-behavior) I listed in my BBB(5,2) announcement:
+But even simpler is the situation where a PA-CTR increases all exponents. In that case, it will apply again and again and again and never stop. Effectively, this machine has entered into a recurrence as detected by PA-CTR Rule Steps. An example is the [third machine]({% post_url 2022-02-17-bbb-5-2-search-results %}#a-machine-with-slightly-more-complex-quasihalting-behavior) I listed in my BBB(5,2) announcement:
 
 |     |  0  |  1  |
 | :-: | :-: | :-: |
@@ -124,11 +124,11 @@ But even simpler is the situation where a PA-CTR increases all exponents. In tha
 |  D  | 0RE | 0RD |
 |  E  | 1LB | 1RE |
 
-at step 12250514892052349453616935044134 (>1.2 × 10<sup>31</sup>) it is in configuration:
+at step 12250514892052349453616935044134 (>1.2 × 10<sup>31</sup>) it is on a blank tape in state D:
 
-# TODO
+<code>0<sup>∞</sup> <D 0<sup>∞</sup></code>
 
-for any `n ≥ 0`:
+and for any `n ≥ 0` we can prove the following PA-CTR rule:
 
 <samp>
   0<sup>∞</sup> <D 1<sup>n</sup> 0<sup>∞</sup><br/>
@@ -140,7 +140,26 @@ for any `n ≥ 0`:
   0<sup>∞</sup> <D 1<sup>n+3</sup> 0<sup>∞</sup><br/>
 </samp>
 
-and then this process repeats forever, increasing the number of `1`s by 3 each recurrence.
+so: <code>0<sup>∞</sup> <D 1<sup>n</sup> 0<sup>∞</sup></code> → <code>0<sup>∞</sup> <D 1<sup>n+3</sup> 0<sup>∞</sup></code>
 
+Since all of the exponents (all one of them) increase, the rule applies again and again and again ad infinitum and so we can be assure that this machine will recur through this series of 6 simulator steps (a mixture of basic steps and Chain Steps) repeatedly.
 
-# TODO: Note that all Lin Recurrent programs are also PA-CTR recurrent ... for example, the LR machine above could be rewritten as a PA-CTR Rule as:
+It is worth noting that all Lin Recurrent programs are PA-CTR Recurrent (as long as you broaden the idea of PA-CTR Recurrence tape compression with blocks of symbols having an exponent). For example, in the machine 3x2 machine I used to demonstrate Lin Recurrence above, we could rewrite the rule as:
+
+<code>... 1<sup>n</sup> B> 1^2 0<sup>∞</sup></code> → <code>... 1<sup>n+1</sup> B> 1^2 0<sup>∞</sup></code>
+
+In fact, Lin Recurrent programs are exactly the programs that are PA-CTR Recurrent with a rule of the form:
+
+* <code>... X<sup>n</sup> Y S> Z 0<sup>∞</sup></code> → <code>... X<sup>n+1</sup> Y S> Z 0<sup>∞</sup></code> or
+* <code>0<sup>∞</sup> Z <S Y X<sup>n</sup> ...</code> → <code>0<sup>∞</sup> Z <S Y X<sup>n+1</sup> ...</code>
+
+Where `X,Y,Z` are all sequences (possibly empty) of symbols. (In our example `X = 1`, `Y` is empty and `Z = 11`).
+
+## Future Work
+
+These are the techniques that we have access to already and have adapted well to the BBB search. But there is a huge world out there of BBB behavior that is not being captured here. Some ideas I have on how to extend this work are:
+
+1. Meta Rules. The way I have defined rules here, each step in the rule must be a basic step or a Chain Step. But what about a rule which uses a previous Rule Step in it's proof? I have explored this to some extent (called "recursive" rules or General_Rules in the codebase) and they turned out to be necessary for analysis of [Pavel Kropitz's current `BB(6, 2)` record holder](https://webusers.imj-prg.fr/~pascal.michel/ha.html#tm62).
+2. "Closed Tape Language" (CTL). This is another technique that Heiner explained to me through personal communication. It involves defining a group of configuration transitions and showing that any machine which enters this group will forever remain in it. In our system, we have defined CTLs for a few simple classes of Regular Expressions for defining these groups. CTL does not tell you exactly what configuration the TM will be in at every future step, but instead it tells you that at all future steps it will be in this group of configs. For the original Busy Beaver, all you need to know is that none of the configs in the group are halted, and then you know the machine will run forever. For Beeping Busy Beaver, this could potentially be augmented to prove that a TM will never enter a given state again after some point. But it would probably not be possible to use it to prove that the remaining states will each be reached infinitely often (In other words, we could potentially prove that this TM has quasihalted with respect to state `B` ... but not that it might sometime later quasihalt with respect to state `C`).
+3. "Backwards reasoning". This is the idea Heiner Marxen talks about of reasoning backwards from the theoretical point where a TM halts in order to prove that it cannot be reached. For Quasihalting this sounds much harder and perhaps impossible, but as Nick recently pointed out in an email, it could be used to show that a TM will never enter Chain Recurrence, say.
+4. Novel techniques. And of course, there is so much room for novel techniques for this novel problem!
