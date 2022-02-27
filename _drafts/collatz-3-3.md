@@ -14,7 +14,7 @@ While analyzing the behavior of the latest `BBB(3, 3)` champion, I found that I 
 |  B  | 2LC | 2LB | 2LB |
 |  C  | 2RC | 2RA | 0LC |
 
-It quasihalts at step 724193411946051617510910916281388064798340875589283913992444770 (> 7.2 * 10^62) with respect to state B. I [announced this machine](https://groups.google.com/g/busy-beaver-discuss/c/ET4Q_ywWPUE) on Tuesday on a new Busy Beaver discussion mailing list.
+It quasihalts at step 724193411946051617510910916281388064798340875589283913992444770 (> 7.2 * 10^62) with respect to state B. I [announced this machine](https://groups.google.com/g/busy-beaver-discuss/c/ET4Q_ywWPUE) on last Tuesday on a new Busy Beaver discussion mailing list.
 
 It turns out that this machine has Collatz-like behavior, but requires an extra level of reasoning to analyze.
 
@@ -40,7 +40,7 @@ Now, we can keep repeating this rule over and over again as long as we still hav
 
 <code>0<sup>inf</sup> <b><C</b> 0<sup>a<sub>0</sub></sup> 2<sup>b<sub>0</sub></sup> ...</code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>a<sub>1</sub></sup> 2<sup>b<sub>1</sub></sup> ...</code> -> ...  -> <code>0<sup>inf</sup> <b><C</b> 0<sup>a<sub>k</sub></sup> 2<sup>b<sub>k</sub></sup> ...</code>
 
-Where 
+Where
 
 * <code>a<sub>0</sub> = a</code>
 * <code>a<sub>k+1</sub> = a<sub>k</sub> + 2</code>
@@ -63,7 +63,7 @@ How many steps will it take? Well, it takes <code>2a<sub>k</sub> + 3</code> step
 
  <img src="https://latex.codecogs.com/png.latex?\sum_{k=0}^{b-1}(2 a_k + 3) = \sum_{k=0}^{b-1}(2 (a + 2 k) + 3) = 4 \sum_{k=0}^{b-1} k + (2a + 3) \sum_{k=0}^{b-1} 1"/>
  <img src="https://latex.codecogs.com/png.latex?= 2 b (b-1) + (2a + 3) b = 2 b^2 + (2a + 1) b"/>
- 
+
 So fully stated:
 
 * Rule 1x: <code>0<sup>inf</sup> <b><C</b> 0<sup>a</sup> 2<sup>b</sup> ...</code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>a+2b</sup> 2<sup>0</sup> ...</code> in <code>2 b<sup>2</sup> + (2a + 1) b</code> steps
@@ -138,27 +138,35 @@ we have:
 
 How many steps does it take? Each iteration of Rule 2 takes <code>2 a<sub>k</sub><sup>2</sup> + 15 a<sub>k</sub> + 27</code> steps. So total it's:
 
-<img src="https://latex.codecogs.com/png.latex?\sum_{k=0}^{b-1}(2 a_k^2 + 15a_k + 27) = \sum_{k=0}^{b-1}(2 (2^k (a + 7) - 7)^2 + 15 (2^k (a + 7) - 7) + 27)"/>
+<img src="https://latex.codecogs.com/png.latex?\sum_{i=0}^{k-1}(2 a_i^2 + 15a_i + 27) = \sum_{i=0}^{k-1}(2 (2^i (a + 7) - 7)^2 + 15 (2^i (a + 7) - 7) + 27)"/>
 
-<img src="https://latex.codecogs.com/png.latex? = \sum_{k=0}^{b-1}(2 (a + 7)^2 4^k + (15 + (2 \cdot 2 \cdot -7)) (a + 7) 2^k + (27 - 15 \cdot 7 + 2 \cdot 7^2))"/>
+<img src="https://latex.codecogs.com/png.latex? = \sum_{i=0}^{k-1}(2 (a + 7)^2 4^i + (15 + (2 \cdot 2 \cdot -7)) (a + 7) 2^i + (27 - 15 \cdot 7 + 2 \cdot 7^2))"/>
 
-<img src="https://latex.codecogs.com/png.latex? = 2 (a + 7)^2 \sum_{k=0}^{b-1} 4^k - 13 (a + 7) \sum_{k=0}^{b-1} 2^k + 20 \sum_{k=0}^{b-1} 1"/>
+<img src="https://latex.codecogs.com/png.latex? = 2 (a + 7)^2 \sum_{i=0}^{k-1} 4^i - 13 (a + 7) \sum_{i=0}^{k-1} 2^i + 20 \sum_{i=0}^{k-1} 1"/>
 
-<img src="https://latex.codecogs.com/png.latex? = 2 (a + 7)^2 \frac{4^b - 1}{3} - 13 (a + 7) (2^b - 1) + 20 b"/>
+<img src="https://latex.codecogs.com/png.latex? = 2 (a + 7)^2 \frac{4^k - 1}{3} - 13 (a + 7) (2^k - 1) + 20 k"/>
 
 Well that's quite a mouthfull! Let's give it a shorthand name:
 
-* <code>B(a, b) = 2/3 (a + 7)<sup>2</sup> (4<sup>b</sup> - 1) - 13 (a + 7) (2<sup>b</sup> - 1) + 20 b</code>
+* <code>B(a, k) = 2/3 (a + 7)<sup>2</sup> (4<sup>k</sup> - 1) - 13 (a + 7) (2<sup>k</sup> - 1) + 20 k</code>
 
 ## Remainder Behavior
 
 Finally, once we've applied Rule 2x, we could be in one of two situations: `r = 0` or `r = 1`. Let's see what happens in each of those cases.
 
-If `r = 0`:
+### Even
+
+For `r = 0`:
 
 * <code>0<sup>inf</sup> <b><C</b> 0<sup>a</sup> 1<sup>0</sup> 0<sup>inf</sup></code> = <code>0<sup>inf</sup> <b><C</b> 0<sup>inf</sup></code> so we are on a blank tape and since `C0 -> 2RC`, we will never leave state `C` again. We've reached Chain Recurrence and the TM must have already Quasihalted.
 
-if `r = 1`:
+But when did it quasihalt? For this we'll have to step back one iteration of Rule 2 and consider what happens starting at <code>0<sup>inf</sup> <b><C</b> 0<sup>a</sup> 1<sup>2</sup> 0<sup>inf</sup></code>. Looking back inside the proof of Rule 2 above, we can see that the last non-`C` state the TM is in is `2a + 5` steps in, it is in state `B` (Note that Rule 1 never leaves state `C`). Therefore:
+
+* <code>0<sup>inf</sup> <b><C</b> 0<sup>a</sup> 1<sup>2</sup> 0<sup>inf</sup></code> -> Quasihalt at time `2a + 6` (Note: Quasihalting time is the step after the last step `B` is seen).
+
+### Odd
+
+For `r = 1`:
 
 |     Step # |         Left tape |   State   | Right tape                  |
 | ---------: | ----------------: | :-------: | :-------------------------- |
@@ -179,9 +187,9 @@ if `r = 1`:
 
 so we have our final rule:
 
-* <code>0<sup>inf</sup> <b><C</b> 0<sup>a</sup> 1<sup>1</sup> 0<sup>inf</sup></code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>a+3</sup> 0<sup>inf</sup></code> in `2a + 34` steps
+* Rule 3: <code>0<sup>inf</sup> <b><C</b> 0<sup>a</sup> 1<sup>1</sup> 0<sup>inf</sup></code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>a+3</sup> 0<sup>inf</sup></code> in `2a + 34` steps
 
-## Collatz-like Behavior
+## "Collatz-like Behavior"
 
 Consider the tape configuration:
 
@@ -189,4 +197,29 @@ Consider the tape configuration:
 
 Then:
 
-* `g(2k+1)` = <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>2k+1</sup> 0<sup>inf</sup></code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>(13 * 2<sup>k</sup> - 7)</sup> 1<sup>1</sup> 0<sup>inf</sup></code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>(13 * 2<sup>k</sup> - 4)</sup> 0<sup>inf</sup></code> = <code>g(13 * 2<sup>k</sup> - 4)</code>
+* `g(2k+1)` = <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>2k+1</sup> 0<sup>inf</sup></code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>(13 * 2<sup>k</sup> - 7)</sup> 1<sup>1</sup> 0<sup>inf</sup></code> in `B(6, k)` steps by Rule 2x
+* -> <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>(13 * 2<sup>k</sup> - 4)</sup> 0<sup>inf</sup></code> = <code>g(13 * 2<sup>k</sup> - 4)</code> in <code>2 (13 * 2<sup>k</sup> - 7) + 34</code> = <code>26 * 2<sup>k</sup> + 20</code> steps by Rule 3
+
+and
+
+* `g(2k)` = <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>2k</sup> 0<sup>inf</sup></code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>(13 * 2<sup>k-1</sup> - 7)</sup> 1<sup>2</sup> 0<sup>inf</sup></code> in `B(6, k-1)` steps by Rule 2x
+* -> Quasihalt at time <code>2 (13 * 2<sup>k-1</sup> - 7) + 6 = 26 * 2<sup>k-1</sup> - 8</code>
+
+Summarizing:
+* `g(2k+1)` -> <code>g(13 * 2<sup>k</sup> - 4)</code> in <code>B(6, k) + 26 * 2<sup>k</sup> + 20</code>
+* `g(2k)` -> Quasihalt at time <code>B(6, k-1) + 26 * 2<sup>k-1</sup> - 8</code>
+
+### Orbit from a blank tape
+
+And finally, connecting this all together. Starting a blank tape, this TM reaches configuration `g(1)` at step 30, from which we get:
+
+| Config |   k |  r | Steps Since Last                                        | Step At |
+| -----: | --: | -: | :------------------------------------------------------ | :------ |
+|   g(1) |   0 |  1 |                                                         | 30      |
+|   g(9) |   4 |  1 | <code>B(6, 0) + 26 * 2<sup>0</sup> + 20</code> = 46     | 76      |
+| g(204) | 102 |  0 | <code>B(6, 4) + 26 * 2<sup>4</sup> + 20</code> = 26_711 | 26_787  |
+|  QHalt |     |    | <code>B(6, 101) + 26 * 2<sup>101</sup> - 8</code> = 724193411946051617510910916281388064798340875589283913992417982 | 724193411946051617510910916281388064798340875589283913992444770 |
+
+### Is `g` Really "Collatz-like"?
+
+`g` has behavior that is reminiscent of Collatz-like behavior. Specifically, it iterates checking the parity of it's argument at each iteration and branching based upon that parity. However, if you spend a few moments looking at the final recurrence for `g` you might notice something ... for all `k > 0`, <code>13 * 2<sup>k</sup> - 4</code> is even, therefore `g` is "total" (if a TM gets to any state `g(m)` it will Quasihalt (in 1 or 2 iterations, except for the single exception `m=1` which takes 3 iterations).
