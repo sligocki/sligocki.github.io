@@ -222,4 +222,7 @@ And finally, connecting this all together. Starting a blank tape, this TM reache
 
 ### Is `g` Really "Collatz-like"?
 
-`g` has behavior that is reminiscent of Collatz-like behavior. Specifically, it iterates checking the parity of it's argument at each iteration and branching based upon that parity. However, if you spend a few moments looking at the final recurrence for `g` you might notice something ... for all `k > 0`, <code>13 * 2<sup>k</sup> - 4</code> is even, therefore `g` is "total" (if a TM gets to any state `g(m)` it will Quasihalt (in 1 or 2 iterations, except for the single exception `m=1` which takes 3 iterations).
+`g` has behavior that is reminiscent of Collatz-like behavior. Specifically, it iterates checking the parity of it's argument at each iteration and branching based upon that parity. However, if you spend a few moments looking at the final recurrence for `g` you might notice something ... for all `k > 0`, <code>13 * 2<sup>k</sup> - 4</code> is even, therefore `g` is known to be "total". If a TM gets to any state `g(m)` it will Quasihalt in:
+* 1 iteration if `m` is even
+* 2 iterations if `m >= 3` is odd or
+* 3 iterations in the one special case (`m = 1`)
