@@ -1,14 +1,14 @@
 ---
 layout: post
-title: BBB Search
+title: BBB Search Process
 tag: busy-beaver
 ---
 
-I am currently in the process of exhaustively searching for [Beeping Busy Beaver]({% post_url 2021-03-06-beeping-busy-beaver %}) (BBB) champions. I'm following roughly the same process that has been used to exhaustively search for Busy Beavers in the past with a few tweaks for the Beeping halt condition.
+A few weeks ago, [I announced new Beeping Busy Beaver results]({% post_url 2022-02-17-bbb-5-2-search-results). In this post, I'd like to explain a little bit about the process I'm using to do this search. I'm following roughly the same process that has been used to exhaustively search for standard Busy Beavers in the past with a few tweaks for the Beeping halt condition.
 
 Beeping Busy Beavers are much more complicated that traditional Busy Beavers. In general it is undecidable to even detect that a Beeping Busy Beaver has already quasihalted! So the prospect of trying to actually prove any BBB values is quite daunting! My goal here is considerably humbler: simply to set a baseline, using existing Busy Beaver techniques, of which Turing Machines (TMs) we can conclusively categorize as Quasihalting and Infinite non-quasihalting and how many remain Unknown.
 
-## Process
+## Process Overview
 
 Here's an outline of the process I am using to search for BBB:
 
@@ -19,10 +19,6 @@ Here's an outline of the process I am using to search for BBB:
 3. Run our Accelerated Simulator which uses Heiner Marxen's [Macro Machines](http://turbotm.de/~heiner/BB/macro.html) and rule proving mechanism (Marxen calls these [CTRs (configuration transitions)](http://turbotm.de/~heiner/BB/bbsimtab.html)).
 
 The results is that all TMs are classified as: Halting, Quasihalting, Infinite non-quasihalting or Unknown.
-
-## Results
-
-... TODO ...
 
 
 ## Quasihalting Behavior
