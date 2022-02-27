@@ -4,7 +4,7 @@ title: BBB Search Process
 tag: busy-beaver
 ---
 
-A few weeks ago, [I announced new Beeping Busy Beaver results]({% post_url 2022-02-17-bbb-5-2-search-results). In this post, I'd like to explain a little bit about the process I'm using to do this search. I'm following roughly the same process that has been used to exhaustively search for standard Busy Beavers in the past with a few tweaks for the Beeping halt condition.
+A few weeks ago, [I announced new Beeping Busy Beaver results]({% post_url 2022-02-17-bbb-5-2-search-results%}). In this post, I'd like to explain a little bit about the process I'm using to do this search. I'm following roughly the same process that has been used to exhaustively search for standard Busy Beavers (see ex: Marxen and Buntrock, [*Attacking the Busy Beaver 5*](http://turbotm.de/~heiner/BB/mabu90.html)) in the past with a few tweaks for the Beeping halt condition.
 
 Beeping Busy Beavers are much more complicated that traditional Busy Beavers. In general it is undecidable to even detect that a Beeping Busy Beaver has already quasihalted! So the prospect of trying to actually prove any BBB values is quite daunting! My goal here is considerably humbler: simply to set a baseline, using existing Busy Beaver techniques, of which Turing Machines (TMs) we can conclusively categorize as Quasihalting and Infinite non-quasihalting and how many remain Unknown.
 
@@ -29,7 +29,16 @@ Specifically, I have augmented 3 parts: Lin Recurrence Detection, Simulator Chai
 
 ### Chain Recurrence
 
-The simplest type of infinite recurrence is a type I will call "Chain Recurrence". This is what happens when you apply a [Chain Step]({% post_url 2021-07-17-bb-collatz %}#chain-step) to one of the infinite blocks of 0s. For example, consider the (2x4 champion I listed above) at step 205,770,076,433,044,242,247,860:
+The simplest type of infinite recurrence is a type I will call "Chain Recurrence". This is what happens when you apply a [Chain Step]({% post_url 2021-07-17-bb-collatz %}#chain-step) to one of the infinite blocks of 0s. For example, consider the `BBB(2,4)` champion:
+
+|     |  0  |  1  |
+| :-: | :-: | :-: |
+|  A  | 1RB | 1LD |
+|  B  | 1RC | 1RB |
+|  C  | 1LC | 1LA |
+|  D  | 0RC | 0RD |
+
+At step 205,770,076,433,044,242,247,860 it is in configuration:
 
 <samp>
 0<sup>∞</sup> <b><B</b> 1 2<sup>2</sup> 1<sup>13</sup> 2<sup>414095476532</sup> 0<sup>∞</sup>
@@ -39,17 +48,16 @@ Since this TM has transition `B0 → 0LB` we can see that this TM will now simpl
 
 Chain Recurrence is the easiest way to detect quasihalting. All you need is a simulator that has [Tape Compression]({% post_url 2021-07-17-bb-collatz %}#tape-compression) and performs Chain Steps.
 
-Note: When combined with [Macro Machines](http://turbotm.de/~heiner/BB/macro.html), it is possible to have a TM which enters Chain Recurrence, but does not Quasihalt. Consider the following machine for example:
-
-... TODO: `1RB ---  1RA ---`
-
 ### Lin Recurrence
 
 The second simplest form of recurrence is "Lin Recurrence". This is a type of behavior first described by Shen Lin in his [PhD dissertation in 1963](http://rave.ohiolink.edu/etdc/view?acc_num=osu1486554418657614). Lin called it "partial recurrence", but recently Nick Drozd has extensively used the term "Lin Recurrence" to describe it and I will follow suit.
 
-In order to describe partial recurrence, I will first define what I'll call "complete recurrence". If a TM is in a specific configuration (tape & state) and then after `n` steps it is in an identical configuration, this is complete recurrence and it will obviously repeat forever with period `n` (or more precisely the period is the smallest `n` for which this holds). For example:
+In order to describe partial recurrence, I will first define what I'll call "complete recurrence". If a TM is in a specific configuration (tape & state) and then after `n` steps it is in an identical configuration, this is complete recurrence and it will obviously repeat forever with period `n` (or more precisely the period is the smallest `n` for which this holds). For example, consider this TM:
 
-TM: `1RB 0RB 3LB 2LB 2LA  2LA 1LB 3RB 4RA 4RB`
+|     |  0  |  1  |  2  |  3  |  4  |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+|  A  | 1RB | 0RB | 3LB | 2LB | 2LA |
+|  B  | 2LA | 1LB | 3RB | 4RA | 4RB |
 
 starting at step 14138899753662763639604 is in configuration
 
@@ -69,7 +77,11 @@ so we can see this will repeat forever (with period 2). Note that the entire tap
 
 it would repeat forever (with period 2). This is the essence of partial/Lin recurrence: Ignoring the parts of the tape that are irrelevant to the recurrence. An example of Lin Recurrence is:
 
-TM: `1RB 1RB  1LC 0RB  0LA 1LA`
+|     |  0  |  1  |
+| :-: | :-: | :-: |
+|  A  | 1RB | 1RB |
+|  B  | 1LC | 0RB |
+|  C  | 0LA | 1LA |
 
 <samp>
 0: ... (B1) 1 1 0<sup>∞</sup><br>
@@ -84,8 +96,51 @@ TM: `1RB 1RB  1LC 0RB  0LA 1LA`
 9: ... 1 (B1) 1 1 0<sup>∞</sup><br>
 </samp>
 
-so we can see that once it enters this partial configuration: `... (B1) 1 1 0<sup>∞</sup>`, it will repeat forever (with period 9) because after 9 steps the configuration once again matches the initial config (simply adding a `1` to the `...` section).
+so we can see that once it enters this partial configuration: <code>... (B1) 1 1 0<sup>∞</sup></code>, it will repeat forever (with period 9) because after 9 steps the configuration once again matches the initial config (simply adding a `1` to the `...` section).
 
-Lin Recurrence is an extremely common behavior for small TMs. Lin used this technique to prove non-halting behavior for all but 40 holdouts in the 3x2 Busy Beaver. Furthermore, 93% of 5x2 TMs I enumerated were proven non-halting using Lin Recurrence detection (with recurrence start time + period < 100). It is also worth noting that Chain Recurrence is actually the special case of Lin Recurrence with period 1.
+Lin Recurrence is an extremely common behavior (at least for small TMs). Lin used this technique to prove non-halting behavior for all but 40 holdouts in BB(3, 2). Furthermore, in my [BBB(5,2) search]({% post_url 2022-02-17-bbb-5-2-search-results%}) I enumerated 687,161,765 TMs (in TNF) and 602,562,873 (93%!) of them enter Lin Recurrence within less than 100 steps (recurrence start time + period < 100).
 
-# PA-CTR Recurrence
+It is also worth noting that Chain Recurrence is actually the same thing as Lin Recurrence with period 1. So you could consider Lin Recurrence to be an extension of Chain Recurrence or Chain Recurrence to be a special-case of Lin Recurrence.
+
+# Proof System (PA-CTR) Recurrence
+
+Finally, the most complicated form of recurrence is one that I will call "PA-CTR Recurrence" or "Proof System Recurrence". This is one special case of a technique that I first learned from Heiner Marxen through personal communication in 2006 and 2008. I believe he calls the technique "pure additive configuration transitions" (PA-CTRs) and you can see examples on his [Busy Beaver Simulations](http://turbotm.de/~heiner/BB/bbsimtab.html) page. I've also previously described this technique calling it [Rule Steps]({% post_url 2021-07-17-bb-collatz %}#rule-step).
+
+A Proof System Rule is a transition rule which applies to an entire class of tape configurations. In general, our rules are of the form (starting configuration using tape compression with some variables in expontents) → (ending configuration using tape compression with exponents as functions of variables in start config) in (steps as a function of variables). For example, in my [recent post about the BBB(3,3) champion]({% post_url 2022-02-27-bb-recurrence-relations %}) I proved many rules starting with:
+
+<code>0<sup>inf</sup> <b><C</b> 0<sup>a</sup> 2<sup>b+1</sup> ...</code> → <code>0<sup>inf</sup> <b><C</b> 0<sup>a+2</sup> 2<sup>b</sup> ...</code> in `2a + 3` steps.
+
+Note that the common convention for this rule notation is that it applies for all values of all variables `>= 0`. In other words, this rule applies if there are any number (or no) `0`s followed by at least 1 `2` on the right half-tape.
+
+This rule is a common type of rule that we can prove. Specifically, it is a "pure additive configuration transition" (PA-CTR) in Marxen's nomenclature. The "pure additive" part means that the configuration before and after are the same except that some exponents change by adding (or subtracting) a constant value. In this case, `a → a + 2` and `b + 1 → b`. PA-CTRs have the advantage that we can accelerate repeated application down into a single simulator step. See, ex: "Rule 1x" and "Rule 2x" in the previously mentioned BBB(3,3) champion article.
+
+But even simpler is the situation where a PA-CTR increases all exponents. In that case, it will apply again and again and again and never stop. Effectively, this machine has entered into a recurrence as detected by PA-CTR Rule Steps. An example is the [third machine]({% post_url bbb-5-2-search-results %}#a-machine-with-slightly-more-complex-quasihalting-behavior) I listed in my BBB(5,2) announcement:
+
+|     |  0  |  1  |
+| :-: | :-: | :-: |
+|  A  | 1RB | 1RD |
+|  B  | 1LC | 1LB |
+|  C  | 1LD | 1RA |
+|  D  | 0RE | 0RD |
+|  E  | 1LB | 1RE |
+
+at step 12250514892052349453616935044134 (>1.2 × 10<sup>31</sup>) it is in configuration:
+
+# TODO
+
+for any `n ≥ 0`:
+
+<samp>
+  0<sup>∞</sup> <D 1<sup>n</sup> 0<sup>∞</sup><br/>
+  0<sup>∞</sup> E> 1<sup>n</sup> 0<sup>∞</sup><br/>
+  0<sup>∞</sup> 1<sup>n</sup> E> 0<sup>∞</sup><br/>
+  0<sup>∞</sup> 1<sup>n</sup> <B 1 0<sup>∞</sup><br/>
+  0<sup>∞</sup> <B 1<sup>n+1</sup> 0<sup>∞</sup><br/>
+  0<sup>∞</sup> <C 1<sup>n+2</sup> 0<sup>∞</sup><br/>
+  0<sup>∞</sup> <D 1<sup>n+3</sup> 0<sup>∞</sup><br/>
+</samp>
+
+and then this process repeats forever, increasing the number of `1`s by 3 each recurrence.
+
+
+# TODO: Note that all Lin Recurrent programs are also PA-CTR recurrent ... for example, the LR machine above could be rewritten as a PA-CTR Rule as:
