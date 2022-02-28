@@ -106,7 +106,7 @@ Finally, the most complicated form of recurrence is one that I will call "PA-CTR
 
 A Proof System Rule is a transition rule which applies to an entire class of tape configurations. In general, our rules are of the form (starting configuration using tape compression with some variables in expontents) → (ending configuration using tape compression with exponents as functions of variables in start config) in (steps as a function of variables). For example, in my [recent post about the BBB(3,3) champion]({% post_url 2022-02-27-bb-recurrence-relations %}) I proved many rules starting with:
 
-<code>0<sup>inf</sup> <b><C</b> 0<sup>a</sup> 2<sup>b+1</sup> ...</code> → <code>0<sup>inf</sup> <b><C</b> 0<sup>a+2</sup> 2<sup>b</sup> ...</code> in `2a + 3` steps.
+<code>0<sup>∞</sup> <b><C</b> 0<sup>a</sup> 2<sup>b+1</sup> ...</code> → <code>0<sup>∞</sup> <b><C</b> 0<sup>a+2</sup> 2<sup>b</sup> ...</code> in `2a + 3` steps.
 
 Note that the common convention for this rule notation is that it applies for all values of all variables `≥0`. In other words, this rule applies if there are any number (or no) `0`s followed by at least 1 `2` on the right half-tape.
 
