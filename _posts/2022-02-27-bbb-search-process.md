@@ -31,12 +31,10 @@ Specifically, I have augmented 3 parts: Lin Recurrence Detection, Simulator Chai
 
 The simplest type of infinite recurrence is a type I will call "Chain Recurrence". This is what happens when you apply a [Chain Step]({% post_url 2021-07-17-bb-collatz %}#chain-step) to one of the infinite blocks of 0s. For example, consider the `BBB(2,4)` champion:
 
-|     |  0  |  1  |
-| :-: | :-: | :-: |
-|  A  | 1RB | 1LD |
-|  B  | 1RC | 1RB |
-|  C  | 1LC | 1LA |
-|  D  | 0RC | 0RD |
+|     |  0  |  1  |  2  |  3  |
+| :-: | :-: | :-: | :-: | :-: |
+|  A  | 1RB | 2LA | 1RA | 1LB |
+|  B  | 0LB | 2RB | 3RB | 1LA |
 
 At step 205,770,076,433,044,242,247,860 it is in configuration:
 
