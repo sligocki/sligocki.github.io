@@ -50,8 +50,8 @@ Among her 20 children (2 symbols to write × 2 directions to move × 5 states to
 | `1RC`/`1LC` | `F(1,k+3,c+1)`  | <code>F(1,0,>3×10<sup>286_575</sup>)</code> | |
 | `1LA`       | `F(4,k+1,c+1)`  | <code>F(1,0,>2×10<sup>25_886</sup>)</code> | |
 | `0LC`       | `F(2,k+1,c+1)`  | <code>F(1,0,>6×10<sup>12_645</sup>)</code> | |
-| `1RD`       | `F(7,k-1,c+1)`* | `F(1,0,112_529_923)`   | |
 | `0RC`/`0LD` | `F(1,k+1,c+1)`  | `F(1,0,43_348)`        | <code>F(>2×10<sup>7003</sup>,0,0)</code> |
+| `1RD`       | `F(7,k-1,c+1)`* | `F(1,0,39_993)`        | <code>F(>6×10<sup>6489</sup>,0,0)</code> |
 | `0RD`       | `F(6,k-1,c+1)`* | `F(1,0,12_601)`        | <code>F(>1×10<sup>2040</sup>,0,0)</code> |
 
 \* Note: Rules with `k-1` only apply when `k ≥ 1`. But this does not have any effect on the analysis in practice because we never see config `F(2, 0, c)` when starting from a blank tape.
@@ -107,17 +107,15 @@ Note: The precise Collatz-like function constants depend on which child we consi
 | `1RC`/`1LC` | `F(1,k+3,c+1)`  | <code>G(1, >3×10<sup>286_575</sup>)</code> | |
 | `1LA`       | `F(4,k+1,c+1)`  | <code>G(1, >2×10<sup>25_886</sup>)</code> | |
 | `0LC`       | `F(2,k+1,c+1)`  | <code>G(1, >6×10<sup>12_645</sup>)</code> | |
-| `1RD`       | `F(7,k-1,c+1)`  | `G(1, 112_529_923)`   | |
 | `0RC`/`0LD` | `F(1,k+1,c+1)`  | `G(1, 43_348)`        | <code>G(>2×10<sup>7003</sup>, 0)</code> |
+| `1RD`       | `F(7,k-1,c+1)`* | `G(1, 39_993)`        | <code>G(>6×10<sup>6489</sup>, 0)</code> |
 | `0RD`       | `F(6,k-1,c+1)`  | `G(1, 12_601)`        | <code>G(>1×10<sup>2040</sup>, 0)</code> |
 
-So this explains column 3 in the table of children above. It lists the largest "reset" config that I have found by direct computation. For the bottom two rows, the value of `m` after the final reset was small enough (less than 100k) that I was able to directly compute through the final stage 1 iteration and discover that these machines quasihalted. However, for the top three rows, the values of `m` are far too large to compute through the next stage 1 iteration directly (It would take > 10<sup>10_000</sup> iterations!)
-
-In the middle `E0→1RD` row is an interesting middle ground. The max reset config I've found is `G(1, 112_529_923)` which I expect to take about 75M iterations to get through stage 1 again. Running a naive direct algorithm appears to scale as O(N<sup>2</sup>) and at this rate it appears that it will take 19.5 days to finish computation running on my laptop. So this one is within reach, but not easy to compute.
+So this explains column 3 in the table of children above. It lists the largest "reset" config that I have found by direct computation. For the bottom three rows, the value of `m` after the final reset was small enough (less than 100k) that I was able to directly compute through the final stage 1 iteration and discover that these machines quasihalted. However, for the top three rows, the values of `m` are far too large to compute through the next stage 1 iteration directly (It would take > 10<sup>10_000</sup> iterations!)
 
 ## Are the Giants Ghosts?
 
-So, these top 4 rows describe 5 Turing Machines which certainly run longer than the reigning BBB(5, 2) champions (their own siblings). But do they ever quasihalt? Are they Giants or merely Ghosts? As far as I know, there are no Mathematical techniques yet to prove that they will never quasihalt and that the only techniques to prove that they do quasihalt is direct computation which is not practical without an exponential speed-up for the top 3 rows.
+So, these top 3 rows (describing 4 Turing Machines) which certainly run longer than the reigning BBB(5, 2) champions (their own siblings). But do they ever quasihalt? Are they Giants or merely Ghosts? As far as I know, there are no Mathematical techniques yet to prove that they will never quasihalt and that the only techniques to prove that they do quasihalt is direct computation which is not practical without an exponential speed-up for the top 3 rows.
 
 However, it **feels** that they certainly must all eventually quasihalt. If they did not, that we would mean that we enter stage 2 an infinite number of times, each time with `m = 1` (never `m = 0`)! If you examine a number of example orbits, you will see that each time they enter stage 2 about half reset and half quasihalt! Of course, this sort of statement is a bit wishy-washy for Mathematics, but at the same time, if I were in a position to wager on whether or not these quasihalted, I would unquestionably wager that they do. All available evidence we have suggests it. I would be shocked to discover that they somehow manage to dance perfectly into the reset lane every time! In the [words of John Conway](https://doi.org/10.4169/amer.math.monthly.120.03.192): These TMs "probviously" quasihalt.
 
