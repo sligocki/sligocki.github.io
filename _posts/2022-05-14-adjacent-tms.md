@@ -1,0 +1,23 @@
+---
+layout: post
+title: Adjacent Turing Machines
+tags: busy-beaver
+---
+
+Let me tell you a story about how I (and my dad) first got into the Busy Beaver game:
+
+In Fall 2004, my first term at college, I learned about the Busy Beaver problem from a professor. He gave us an assignment to write a [Genetic Programming](https://en.wikipedia.org/wiki/Genetic_programming) optimizer to attempt to find Busy Beavers. I implemented it and finished the class, but my optimizer wasn't very successful. However, I thought the problem was interesting, so I shared it with my dad when I was visiting home for Christmas break that year. Dad had some previous positive experience with using [Simulated Annealing](https://en.wikipedia.org/wiki/Simulated_annealing) as an optimization method, so we spent some evenings rewriting my code to use Simulated Annealing and trying that out.
+
+Sadly, our new Simulated Annealing code hadn't found anything interesting by the time I was heading back to school in January. I think that I chalked it up to a fun experiment and promptly forgot about the problem entirely while I was busy with my second term. Luckily, Dad kept running our code and extended it to run on TMs with more than 2 symbols. And a month or so later, he contacted me with exciting news: we had found a new BB(2, 4) champion (which still [reigns](https://webusers.imj-prg.fr/~pascal.michel/ha.html#tm24) to this day)!
+
+This was an extremely exciting moment for me! Here I was, a lowly freshman, barely an adult and our work was getting international attention! Suffice to say, Dad and I both contracted the Busy Beaver bug that day, and it is incurable (symptoms include loss of sleep, inability to communicate with uninfected peers and obsession with large number notations). Over the next several years, I devoted many evenings, weekends and summers to researching the Busy Beaver literature, improving our code and understanding more about the best techniques.
+
+Today, our codebase has grown to use many powerful techniques, but there is one conspicuously missing: Simulated Annealing. It turns out that a direct enumeration of every single 2x4 TM ran faster than our Simulated Annealing search! It appears that our innovation was not a new search algorithm, instead it was the hubris to run every machine out to over 4 million steps when the best champion only ran for 7195. In fact, Allen Brady had run all 2x4 machines out to 1 million steps in the 1980s before giving up (so close ... and yet so far).
+
+It turns out that optimization algorithms (like Simulated Annealing or Genetic Programming) are very temperamental. They can be extremely effective when the parameter space is "well-behaved", when making a small change in parameters leads to a small change in result. However, this is not the case in the Busy Beaver game. The smallest possible change (modifying a single transition) almost always drastically changes the behavior of that machine.
+
+Over time, I came to believe that **all great Turing Machines are only children** (with no siblings of note), isolated mountain peaks jutting out from a wasteland of complete mediocrity in all directions. That there was no value in looking at machines adjacent to champion, because you might as well just look at a random sample of machines. That there was effectively no correlation between adjacent machines (at least, if we define adjacency as differing in only one transition).
+
+That is, I believed this until last month, when I discovered the [Mother of Giants]({% post_url 2022-04-03-mother-of-giants %}). This is a collection, that has now grown to 14 TMs, which all differ by only 1 (or 2) transitions from each other and yet are all extremely effective at the Beeping Busy Beaver game because they share the framework to simulate a collection of very effective Collatz-like functions. Nick Drozd [suggested](https://groups.google.com/g/busy-beaver-discuss/c/zUiw3G7hR8E/m/_S_YYXeRCgAJ) that this may be sign that none of these TMs are true champions. I certainly don't think we've found the BBB(5, 2) champion yet (nor even the [Spinning Beaver](https://groups.google.com/g/busy-beaver-discuss/c/Dq8PYAkoMXU/m/EbjlyKioAQAJ) champion) because it feels far too early in the search process. But I also believe that we ignore adjacent Turing Machines at our own peril. If I had not looked for siblings of the BBB(5, 2) champion, I never would have discovered all of these fascinating TMs which "probviously" quasihalt, but cannot be proven to.
+
+Perhaps it is time to dust off our 18 year old Simulated Annealing code :)
