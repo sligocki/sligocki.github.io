@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Mini: Analyses
+title: Mini Analyses
 tags: busy-beaver collatz
 ---
 
