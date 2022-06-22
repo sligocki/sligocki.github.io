@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Goodstein sequences
+title: Goodstein Sequences
 tags: big-number-notation
 ---
 
