@@ -14,7 +14,7 @@ While analyzing the behavior of the latest `BBB(3, 3)` champion, I found that I 
 |  B  | 2LC | 2LB | 2LB |
 |  C  | 2RC | 2RA | 0LC |
 
-It quasihalts at step 724193411946051617510910916281388064798340875589283913992444770 (> 7.2 * 10^62) with respect to state B. I [announced this machine](https://groups.google.com/g/busy-beaver-discuss/c/ET4Q_ywWPUE) on last Tuesday on a new Busy Beaver discussion mailing list.
+It quasihalts at step 724193411946051617510910916281388064798340875589283913992444770 ($$> 7.2 \times 10^{62}$$) with respect to state `B`. I [announced this machine](https://groups.google.com/g/busy-beaver-discuss/c/ET4Q_ywWPUE) on last Tuesday on a new Busy Beaver discussion mailing list.
 
 It turns out that this machine has Collatz-like behavior, but requires an extra level of reasoning to analyze.
 
@@ -61,8 +61,9 @@ Rule 1x: <code>0<sup>inf</sup> <b><C</b> 0<sup>a</sup> 2<sup>b</sup> ...</code> 
 
 How many steps will it take? Well, it takes <code>2a<sub>k</sub> + 3</code> steps at each iteration, so in total it will take:
 
- <img src="https://latex.codecogs.com/png.latex?\sum_{k=0}^{b-1}(2 a_k + 3) = \sum_{k=0}^{b-1}(2 (a + 2 k) + 3) = 4 \sum_{k=0}^{b-1} k + (2a + 3) \sum_{k=0}^{b-1} 1"/>
- <img src="https://latex.codecogs.com/png.latex?= 2 b (b-1) + (2a + 3) b = 2 b^2 + (2a + 1) b"/>
+$$ \sum_{k=0}^{b-1}(2 a_k + 3) = \sum_{k=0}^{b-1}(2 (a + 2 k) + 3) = 4 \sum_{k=0}^{b-1} k + (2a + 3) \sum_{k=0}^{b-1} 1 $$
+
+$$ = 2 b (b-1) + (2a + 3) b = 2 b^2 + (2a + 1) b $$
 
 So fully stated:
 
@@ -138,17 +139,17 @@ we have:
 
 How many steps does it take? Each iteration of Rule 2 takes <code>2 a<sub>k</sub><sup>2</sup> + 15 a<sub>k</sub> + 27</code> steps. So total it's:
 
-<img src="https://latex.codecogs.com/png.latex?\sum_{i=0}^{k-1}(2 a_i^2 + 15a_i + 27) = \sum_{i=0}^{k-1}(2 (2^i (a + 7) - 7)^2 + 15 (2^i (a + 7) - 7) + 27)"/>
+$$ \sum_{i=0}^{k-1}(2 a_i^2 + 15a_i + 27) = \sum_{i=0}^{k-1}(2 (2^i (a + 7) - 7)^2 + 15 (2^i (a + 7) - 7) + 27) $$
 
-<img src="https://latex.codecogs.com/png.latex? = \sum_{i=0}^{k-1}(2 (a + 7)^2 4^i + (15 + (2 \cdot 2 \cdot -7)) (a + 7) 2^i + (27 - 15 \cdot 7 + 2 \cdot 7^2))"/>
+$$ = \sum_{i=0}^{k-1}(2 (a + 7)^2 4^i + (15 + (2 \cdot 2 \cdot -7)) (a + 7) 2^i + (27 - 15 \cdot 7 + 2 \cdot 7^2)) $$
 
-<img src="https://latex.codecogs.com/png.latex? = 2 (a + 7)^2 \sum_{i=0}^{k-1} 4^i - 13 (a + 7) \sum_{i=0}^{k-1} 2^i + 20 \sum_{i=0}^{k-1} 1"/>
+$$ = 2 (a + 7)^2 \sum_{i=0}^{k-1} 4^i - 13 (a + 7) \sum_{i=0}^{k-1} 2^i + 20 \sum_{i=0}^{k-1} 1 $$
 
-<img src="https://latex.codecogs.com/png.latex? = 2 (a + 7)^2 \frac{4^k - 1}{3} - 13 (a + 7) (2^k - 1) + 20 k"/>
+$$ = 2 (a + 7)^2 \frac{4^k - 1}{3} - 13 (a + 7) (2^k - 1) + 20 k $$
 
 Well that's quite a mouthfull! Let's give it a shorthand name:
 
-* <code>B(a, k) = 2/3 (a + 7)<sup>2</sup> (4<sup>k</sup> - 1) - 13 (a + 7) (2<sup>k</sup> - 1) + 20 k</code>
+$$ B(a, k) = \frac{2}{3} (a + 7)^2 (4^k - 1) - 13 (a + 7) (2^k - 1) + 20 k$$
 
 ## Remainder Behavior
 
@@ -197,17 +198,17 @@ Consider the tape configuration:
 
 Then:
 
-* `g(2k+1)` = <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>2k+1</sup> 0<sup>inf</sup></code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>(13 * 2<sup>k</sup> - 7)</sup> 1<sup>1</sup> 0<sup>inf</sup></code> in `B(6, k)` steps by Rule 2x
-* -> <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>(13 * 2<sup>k</sup> - 4)</sup> 0<sup>inf</sup></code> = <code>g(13 * 2<sup>k</sup> - 4)</code> in <code>2 (13 * 2<sup>k</sup> - 7) + 34</code> = <code>26 * 2<sup>k</sup> + 20</code> steps by Rule 3
+* `g(2k+1)` = <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>2k+1</sup> 0<sup>inf</sup></code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>(13 * 2<sup>k</sup> - 7)</sup> 1<sup>1</sup> 0<sup>inf</sup></code> in $$B(6, k)$$ steps by Rule 2x
+* -> <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>(13 * 2^k - 4)</sup> 0<sup>inf</sup></code> = <code>g(13 * 2^k - 4)</code> in $$2 (13 \cdot 2^k - 7) + 34 = 26 \cdot 2^k + 20$$ steps by Rule 3
 
 and
 
-* `g(2k)` = <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>2k</sup> 0<sup>inf</sup></code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>(13 * 2<sup>k-1</sup> - 7)</sup> 1<sup>2</sup> 0<sup>inf</sup></code> in `B(6, k-1)` steps by Rule 2x
-* -> Quasihalt at time <code>2 (13 * 2<sup>k-1</sup> - 7) + 6 = 26 * 2<sup>k-1</sup> - 8</code>
+* `g(2k)` = <code>0<sup>inf</sup> <b><C</b> 0<sup>6</sup> 1<sup>2k</sup> 0<sup>inf</sup></code> -> <code>0<sup>inf</sup> <b><C</b> 0<sup>(13 * 2<sup>k-1</sup> - 7)</sup> 1<sup>2</sup> 0<sup>inf</sup></code> in $$B(6, k-1)$$ steps by Rule 2x
+* -> Quasihalt at time $$2 (13 \cdot 2^{k-1} - 7) + 6 = 13 \cdot 2^k - 8$$.
 
 Summarizing:
-* `g(2k+1)` -> <code>g(13 * 2<sup>k</sup> - 4)</code> in <code>B(6, k) + 26 * 2<sup>k</sup> + 20</code>
-* `g(2k)` -> Quasihalt at time <code>B(6, k-1) + 26 * 2<sup>k-1</sup> - 8</code>
+* `g(2k+1)` -> <code>g(13 * 2<sup>k</sup> - 4)</code> in $$B(6, k) + 26 * 2^k + 20$$
+* `g(2k)` -> Quasihalt at time $$B(6, k-1) + 26 * 2{k-1} - 8$$
 
 ### Orbit from a blank tape
 
@@ -218,7 +219,7 @@ And finally, connecting this all together. Starting a blank tape, this TM reache
 |   g(1) |   0 |  1 |                                                         | 30      |
 |   g(9) |   4 |  1 | <code>B(6, 0) + 26 * 2<sup>0</sup> + 20</code> = 46     | 76      |
 | g(204) | 102 |  0 | <code>B(6, 4) + 26 * 2<sup>4</sup> + 20</code> = 26_711 | 26_787  |
-|  QHalt |     |    | <code>B(6, 101) + 26 * 2<sup>101</sup> - 8</code> = 724193411946051617510910916281388064798340875589283913992417982 | 724193411946051617510910916281388064798340875589283913992444770 |
+|  QHalt |     |    | <code>B(6, 101) + 13 * 2<sup>102</sup> - 8</code> = 724193411946051617510910916281388064798340875589283913992417982 | 724193411946051617510910916281388064798340875589283913992444770 |
 
 ### Is `g` Really "Collatz-like"?
 
