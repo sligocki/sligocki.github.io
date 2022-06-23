@@ -58,7 +58,7 @@ We could keep going along this line of reasoning to develop higher and higher op
 
 ## Goodstein sequences
 
-> See also my [article on Goodstein Sequences](https://www.sligocki.com/2009/10/14/goodstein-sequences.html)
+> See also my [article on Goodstein Sequences]({% post_url 2009-10-14-goodstein-sequences %})
 
 In 1944, [Reuben Goodstein](https://en.wikipedia.org/wiki/Reuben_Goodstein) proposed a type of sequence that were eventually called [Goodstein sequences](https://en.wikipedia.org/wiki/Goodstein%27s_theorem) (by Kirby and Paris, 1982).
 
