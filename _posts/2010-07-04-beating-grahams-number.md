@@ -102,10 +102,11 @@ The (*) indicates that Copying $$\beta$$ will be the difficult part here.
 
 I originally wrote this essay in 2010. I never ended up building a TM which beat Graham's number, but aparently I inspired some other folks to. This [CS Stack Exchange answer](https://cs.stackexchange.com/a/69476/2997) documents the history of improvement on $$BB$$ values beating Graham's number:
 
-* On 19 Sep 2010: res001 claimed to have proven $$\Sigma(64) > G$$: [Blog](http://morethanazillion.blogspot.com/) [Summary](https://sites.google.com/site/res0001/surpassing-graham-s-number). In the summary, they directly reference this article.
+* On 19 Sep 2010: "res001" claimed to have proven $$\Sigma(64) > G$$: [Blog](http://morethanazillion.blogspot.com/) [Summary](https://sites.google.com/site/res0001/surpassing-graham-s-number). In the summary, they directly reference this article.
 * On 31 Mar 2013: "Deedlit11" claimed to have proven $$\Sigma(25) > G$$: [Googology Post](https://googology.fandom.com/wiki/User_blog:Deedlit11/Okay,_more_Turing_machines#A_New_Record!_Beating_Graham's_number_with_a_2-symbol_TM)
 * There are uncited claims at proving $$\Sigma(23) > G$$ and $$\Sigma(22) > G$$.
 * On 24 Jul 2016: "Wythagoras" claimed to have proven $$\Sigma(19) > G$$ and then $$\Sigma(18) > G$$: [Googology Post](https://googology.fandom.com/wiki/User_blog:Wythagoras/The_nineteenth_Busy_Beaver_number_is_greater_than_Graham's_Number!?useskin=oasis)
+* On 26 Mar 2021: "QNagaj" claimed to have proven $$\Sigma(16) > G$$: [Googology Comment](https://googology.fandom.com/wiki/User_blog:Wythagoras/The_nineteenth_Busy_Beaver_number_is_greater_than_Graham%27s_Number!?commentId=4400000000000019187&replyId=4400000000000101283) [TM Definition](http://morphett.info/turing/turing.html?197640ce0f380f8a6b0a4cdd138156a0)
 
 I have not had a chance to investigate any of these machines yet.
 
