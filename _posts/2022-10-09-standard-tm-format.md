@@ -32,17 +32,17 @@ This format is a one-line (compressed version) of traditional TM transition tabl
 
 |     |  0  |  1  |  2  |
 | :-: | :-: | :-: | :-: |
-|  A  | 1RB | 2LA | 1LC |
-|  B  | 0LA | 2RB | 1LB |
-|  C  | 1RZ | 1RA | 1RC |
+|  A  | 1RB | 2LA | 1RA |
+|  B  | 2LC | --- | 2RA |
+|  C  | 2LA | 1LC | 1RZ |
 
-Where capital letters A-... represent states, A is the initial state, Z is the halt state[^Halt], digits 0-... represent symbols and 0 is the blank symbol.
+Where capital letters A-... represent states, A is the initial state, Z is the halt state[^Halt], digits 0-... represent symbols and 0 is the blank symbol and `---` represents an undefined transition.
 
 [^Halt]: more commonly called H historically, but I prefer Z to allow 8+ state machines.
 
 So, let's say you are in state "A" and read a "2", then looking that up in the table you see transition instruction "1LC" which means: Write a "1", move Left, and enter state "C".
 
-To convert from this tabular format to the standard one-line format, first concatenate all instructions on each row together (to get strings `1RB2LA1LC`, `0LA2RB1LB` and `1RZ1RA1RC`) and then combine these in order from top to bottom adding a "_" (underscore) between each row: `1RB2LA1LC_0LA2RB1LB_1RZ1RA1RC`.
+To convert from this tabular format to the standard one-line format, first concatenate all instructions on each row together (to get strings `1RB2LA1RA`, `2LC---2RA` and `2LA1LC1RZ`) and then combine these in order from top to bottom adding a "_" (underscore) between each row: `1RB2LA1RA_2LC---2RA_2LA1LC1RZ`.
 
 
 ### Important Details
