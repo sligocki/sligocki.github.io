@@ -5,11 +5,11 @@ title: >
 tags: busy-beaver
 ---
 
-In 2003, Georgi Georgiev (mostly known by his pseudonym "Skelet") [shared](http://skelet.ludost.net/bb/index.html) his very impressive results in his search to prove $$BB(5)$$. Specifically, he claimed to have proven all TMs except for [43 holdouts](https://skelet.ludost.net/bb/nreg.html) (which he called "Hardly Non Regular" HNR). In the Busy Beaver community, his list of 43 machines has been regarded with a mixture of amazement, suspicion and hope over the last 20 years. Amazement because no other person has ever reported anywhere close to that result (for reference, as of this Summer, my $$BB(5)$$ search had over 7k holdouts). Suspicion because his evidence was only a single 6000 line uncommented Pascal program. And hope because it seemed like this meant that proving $$BB(5)$$ could be "within reach". [bbchallenge.org](https://bbchallenge.org/skelet) maintains a canonical ordering of these HNR TMs and so they are often referred to simply as "Skelet #N".
+In 2003, Georgi Georgiev (widely known by his pseudonym "Skelet") [shared](http://skelet.ludost.net/bb/index.html) some very impressive results in his search to prove $$BB(5)$$. Specifically, he claimed to have proven all TMs except for [43 holdouts](https://skelet.ludost.net/bb/nreg.html) (which he called "Hardly Non Regular" HNR). In the Busy Beaver community, his list of 43 machines has been regarded with a mixture of amazement, suspicion and hope over the last 20 years. Amazement because no other person has ever reported anywhere close to that result (for reference, as of this Summer, my $$BB(5)$$ search had over 7k holdouts). Suspicion because his evidence was only a single 6000 line uncommented Pascal program. And hope because it seemed like this meant that proving $$BB(5)$$ could be "within reach". [bbchallenge.org](https://bbchallenge.org/skelet) maintains a canonical ordering of these HNR TMs and so they are often referred to simply as "Skelet #N".
 
 Whether or not you trust Skelet's program completely: these 43 are certainly examples of some of the most difficult $$BB(5)$$ TMs to analyze and prove. And as the [bbchallenge.org](https://bbchallenge.org/story) community has pushed towards it's own attempt to prove $$BB(5)$$, many of these Skelet HNR TMs continue to appear in our lists of holdouts. Many people have devoted significant time to analyzing and proving these machines by hand. Of particular note, Dan Briggs has a [project](https://github.com/danbriggs/Turing) to write proofs for these 43 Skelet holdouts and [claims](https://github.com/danbriggs/Turing/blob/master/paper/HNRs.pdf) to have reduced the list to 21.
 
-Last week I dove deeply into analyzing one of these remaining 21 TMs (Skelet \#34) by hand and I present the proof that it is infinite here. As far as I know, this is the first proof of this machine.
+Last October (2022), I dove deeply into analyzing one of these remaining 21 TMs (Skelet \#34) by hand and I present the proof that it is infinite here. As far as I know, this is the first proof of this machine.
 
 
 ## The Machine
@@ -31,7 +31,7 @@ For the rest of this article, I will use this TNF state naming.
 
 ## Behavior Overview
 
-Broadly, this TM alternates between 2 "phases". It spends the majority of it's time in the "Counter Phase": simulating a two-sided binary counter. It stays in the Counter Phase until the right side counter "expands" (reaches a new power of 2) at which point it transitions to the "Reset Phase". In the Reset Phase it follows a more complicated set of rules before starting the Counter Phase again. The proof that this TM never halts hinges on proving that the Reset Phase always finishes relatively quickly.
+Broadly, this TM alternates between 2 "phases". It spends the majority of it's time in the "Counter Phase": simulating a two-sided binary counter. It stays in the Counter Phase until the right side counter "expands" (reaches a new power of 2) at which point it transitions to the "Reset Phase". In the Reset Phase it follows a more complicated set of rules before starting the Counter Phase again. The proof that this TM never halts hinges on proving that the Reset Phase always finishes relatively "quickly" (maintaining the "Reset Invariant" below).
 
 ### Binary Expansion Countdown
 
@@ -55,17 +55,17 @@ b(138) &=& 118 \\
 
 To start, we need to define a bit of notation:
 
-Let `L(n)` represent a big-endian binary counter using blocks `0000` and `1000` (to represent digits `0` and `1` respectively). Precisely, let's recursively define `L(n)` for any non-negative integer `n` by:
+Let `L(n)` represent a big-[endian](https://en.wikipedia.org/wiki/Endianness) binary counter using blocks `0000` and `1000` (to represent digits `0` and `1` respectively). Formally, let's recursively define `L(n)` for any non-negative integer `n` by:
  * `L(0)` is the empty string
  * `L(2k) = L(k) 0000`
  * `L(2k+1) = L(k) 1000`
 
-Let `R(m)` represent a little-endian binary counter using blocks `10` and `11`. Precisely:
+Let `R(m)` represent a little-endian binary counter using blocks `10` and `11`. Formally:
  * `R(0)` is the empty string
  * `R(2k) = 10 R(k)`
  * `R(2k+1) = 11 R(k)`
 
-Finally, let <code>D(n, m) = 0<sup>∞</sup> L(n) <C 1010 R(m) 0<sup>∞</sup></code>.
+Finally, let <code>D(n, m) = 0<sup>∞</sup> L(n) <C 1010 R(m) 0<sup>∞</sup></code>. $$D(n, m)$$ is a typical Counter phase configuration.
 
 
 ### Counter Rules
@@ -113,7 +113,7 @@ QED
 
 Combining these rules leads to the two-sided counter behavior succinctly described by these rules:
 
-Corollary 5: For all $$b(m) > 1$$, $$D(n, m) \to D(n+1, m+1)$$.
+Corollary 5: If $$b(m) > 1$$, then $$D(n, m) \to D(n+1, m+1)$$.
 
 Corollary 6: For any $$m$$, let $$d = b(m) - 1$$, then $$D(n, m) \to D(n+d, m+d)$$ and $$b(m+d) = 1$$ (i.e. $$m+d = 2^k - 1$$ for some $$k \in \mathbb{N}$$).
 
@@ -129,88 +129,149 @@ But what happens once $$b(m) = 1$$? This is when the TM enters the "Reset Phase"
 
 Let's start by looking at what happens right after reaching $$b(m) = 1$$ (in other words, when the right counter would "expand" or "overflow").
 
-Lemma 7: <code>110 C> 11<sup>k</sup> 0 -> <C 10<sup>k+1</sup> 11</code>
+Lemma 7: <code>0 1110 C> 11<sup>k</sup> 0 -> <C 1011 10<sup>k</sup> 11</code>
 
  * I leave this proof as an exercise to the reader.
 
-So, let's say that we ended the "Counter Phase" in:
+Notice that Lemma 7 eats 5 symbols to the left of the starting config (`0 1110`) instead of the standard block size of 4. Because of this it actually leads to the left side blocks all ending up "shifted". All the blocks which used to be `1000` now become `0100`.
 
- * <code>D(9, 15) = 0<sup>∞</sup> 1000 0000 0000 1000 <C 1010 11<sup>4</sup> 0<sup>∞</sup></code>
+In order to describe this let's define $$K(n)$$ to be the same as $$L(n)$$ except with all `1000` blocks replaced by `0100` blocks. Formally:
+ * `K(0)` is the empty string
+ * `K(2k) = K(k) 0000`
+ * `K(2k+1) = K(k) 0100`
 
-Simulating forward we get:
+Note that <code>0<sup>∞</sup> L(n) = 0<sup>∞</sup> K(n) 0</code>.
 
- * <code>0<sup>∞</sup> 1000 0000 1000 0000 B> 1010 11<sup>4</sup> 0<sup>∞</sup></code> by Theorem 1
- * <code>0<sup>∞</sup> 1000 0000 1000 0000 1 110 C> 11<sup>4</sup> 0<sup>∞</sup></code> by direct simulation.
- * <code>0<sup>∞</sup> 1000 0000 1000 0000 1 <C 10<sup>5</sup> 11 0<sup>∞</sup></code> by Lemma 7.
- * <code>0<sup>∞</sup> 1000 0000 1000 000 <C 1011 10<sup>4</sup> 11 0<sup>∞</sup></code> by direct simulation.
- * <code>0<sup>∞</sup> 0100 0000 0100 0000 <C 1011 10<sup>4</sup> 11 0<sup>∞</sup></code> by rewriting so that left side has block size 4 again.
+And let <code>E(n, a, m) = 0<sup>∞</sup> K(n) <C 101a R(m) 0<sup>∞</sup></code> be the analogous version of $$D(n, m)$$ using $$K$$ instead of $$L$$ (and generalized to allow $$a \in \{0, 1\}$$). Just as $$D(n, m)$$ was a typical Counter phase configuration, $$E(n, a, m)$$ will be a typical Reset phase configuration.
 
-This configuration looks similar to the general Counter config $$D(a, b)$$, but with 2 main differences:
+Theorem 8: $$D(n, 2^k - 1) \to E(n+1, 1, 2^k)$$
+
+Proof:
+ * <code>D(n, 2<sup>k</sup> - 1) = 0<sup>∞</sup> L(n) <C 1010 11<sup>k</sup> 0<sup>∞</sup></code> is the starting config.
+ * <code> -> 0<sup>∞</sup> L(n+1) B> 1010 11<sup>k</sup> 0<sup>∞</sup> = 0<sup>∞</sup> K(n+1) 0 B> 1010 11<sup>k</sup> 0<sup>∞</sup></code> by Theorem 1.
+ * <code> -> 0<sup>∞</sup> K(n+1) 0 1110 C> 11<sup>k</sup> 0<sup>∞</sup></code> by direct simulation.
+ * <code> -> 0<sup>∞</sup> K(n+1) <C 1011 10<sup>k</sup> 11 0<sup>∞</sup> = E(n+1, 1, 2<sup>k</sup>)</code> by Lemma 7.
+
+QED
+
+There are two differences between these new Reset configurations ($$E(n, a, m)$$) and the previously described Counter configs ($$D(n, m)$$):
 
  1. The blocks on the left are "shifted" by 1, so what used to be `1000` is not `0100`.
- 2. The middle section used to be `1010` and is now `1011`.
+ 2. The middle section used to be `1010` and can now also be `1011`.
 
-However, notice that the right side is still in the standard $$R(m)$$ format. It turns out that the (2) change (middle `1010` -> `1011`) is a minor detail that (surprisingly) has almost no change on behavior, but the (1) change (left block `1000` -> `0100`) will lead to a very different behavior.
+It turns out that the (2) change (middle `1010` -> `1011`) is a minor detail that (surprisingly) has almost no change on behavior, but the (1) change (left block `1000` -> `0100`) will lead to a very different behavior.
 
 
 #### Potential to Halt
 
-I have mentioned a few times already that the proof that this TM does not halt depends on a timing issue. I'm not yet ready to explain this issue completely, but I can give you a little hint at this point. As noted above, after overflowing the right counter we ended up shifting the left blocks so that all the `1000` blocks became `0100` blocks. If this TM were to somehow shift any of these blocks once more (so they ended up as `0010` blocks), then the TM would have the potential to halt. Specifically:
+I have mentioned already that the proof that this TM does not halt depends on a timing issue. I'm not yet ready to explain this issue completely, but I can give you a little hint at this point. As noted above, after overflowing the right counter we ended up shifting the left blocks so that all the `1000` blocks became `0100` blocks. If this TM were to overflow the right counter again while there were still `0100` blocks on the left side, they would be shifted again to `0010` blocks. And if the left side of the tape were to contain `0010` blocks then it would have the potential to halt. Specifically:
 
  * `10 <C -> Halt` in 2 steps by direct simulation.
 
 So, as we will see, the crux of the proof that this TM never halts will depend up on showing that we do not overflow the right counter again until after we have completed the "Reset Phase" and removed all `0100` blocks from the left side of the tape.
 
 
-### Rules
+### Reset Rules
 
 First, we have a totally new rule about how the TM interacts with `0100` blocks on the left:
 
-Lemma 8: <code>0100 1000<sup>k</sup> <C 10 -> <C 1010 10<sup>2k</sup> 11</code>
+Lemma 9: <code>0100 1000<sup>k</sup> <C 10 -> <C 1010 10<sup>2k</sup> 11</code>
+
+ * Proof left as an exercise to the reader.
 
 Second, we have a generalization of a rule from the Counter Phase:
 
-Lemma 9: If $$b(m) > 1$$ and $$b(n) > 1$$, then `L(n) <C 101a R(m) -> L(n+1) <C 101a R(m+1)` for any $$a \in \{0, 1\}$$
+Lemma 10: If $$b(m) > 1$$ and $$b(n) > 1$$, then `L(n) <C 101a R(m) -> L(n+1) <C 101a R(m+1)` for any $$a \in \{0, 1\}$$
 
  * I leave this proof as an exercise to the reader. We have already proven the case of `a = 1` in the Counter Phase section. The proof for `a = 0` is very similar. A priori I would not have guessed that we would have the same behavior in both of these cases, but it turns out that we do.
 
-Corollary 10: For all $$k \in \mathbb{N}$$, $$a \in \{0, 1\}$$, and $$m$$ such that $$b(m) > 2^k - 1$$, then <code>0000<sup>k</sup> <C 101a R(m) -> 1000<sup>k</sup> <C 101a R(t)</code> where $$t = m + 2^k - 1$$
+Corollary 11: For all $$k \in \mathbb{N}$$, $$a \in \{0, 1\}$$, and $$m$$ such that $$b(m) > 2^k - 1$$, then <code>0000<sup>k</sup> <C 101a R(m) -> 1000<sup>k</sup> <C 101a R(t)</code> where $$t = m + 2^k - 1$$
 
- * This follows directly from Lemma 9 when you note that the condition $$b(m) > 2^k - 1$$ assures that you can apply Lemma 9 $$2^k - 1$$ times.
+ * This follows directly from Lemma 10 when you note that the condition $$b(m) > 2^k - 1$$ assures that you can apply Lemma 10 $$2^k - 1$$ times.
 
-Finally, combining Lemma 8 and Corollary 10 together we get:
+Finally, combining Lemma 9 and Corollary 11 together we get:
 
-Corollary 11: For all $$k \in \mathbb{N}$$, $$a \in \{0, 1\}$$, and $$m$$ such that $$b(m) > 2^k - 1$$, then <code>0100 0000<sup>k</sup> <C 101a R(m) -> <C 1010 10<sup>2k</sup> 11 10 1a R(t)</code> where $$t = m + 2^k - 1$$
+Corollary 12: For all $$k \in \mathbb{N}$$, $$a \in \{0, 1\}$$, and $$m$$ such that $$b(m) > 2^k - 1$$, then <code>0100 0000<sup>k</sup> <C 101a R(m) -> <C 1010 10<sup>2k</sup> 11 1a R(t)</code> where $$t = m + 2^k - 1$$
 
-So, Corollary 11 explains exactly how the the Reset Phase will operate. Each application of Corollary 11 "consumes" one `0100` block as long as the condition $$b(m) > 2^k - 1$$ holds. Ensuring that this condition always holds will be the critical part of this proof.
+So, Corollary 12 explains exactly how the the Reset Phase will operate. Each application of Corollary 12 "consumes" one `0100` block as long as the condition $$b(m) > 2^k - 1$$ holds. Ensuring that this condition always holds will be the critical part of this proof.
 
 
 ### Reset Invariant
 
-In order to prove that the $$b(m) > 2^k - 1$$ condition in Corollary 11 will always hold while the TM simulates the Reset Phase. I will introduce an invariant condition:
+In order to prove that the $$b(m) > 2^k - 1$$ condition in Corollary 12 will always hold while the TM simulates the Reset Phase. I will introduce an invariant condition:
 
-A TM configuration satisfies the **Reset Invariant** (RI) if:
+A $$E(n, a, m)$$ configuration satisfies the **Reset Invariant** if $$b(m) > n$$
 
- 1. It is in a configuration <code>0<sup>∞</sup> X<sub>k</sub> <C 101a R(m) 0<sup>∞</sup></code> (where <code>X<sub>k</sub></code> is any sequence of $$k$$ blocks each of which are either `0000` or `0100`) and
- 2. $$b(m) > 2^k$$
+Theorem 13: If $$b(m) > n$$ and $$n > 0$$, then there exist $$n^\prime, m^\prime$$ with $$0 \le n^\prime < n$$ and $$b(m^\prime) > n^\prime$$ such that:
 
-Now, we strengthen Corollary 11 to show that it preserves the Reset Invariant:
+$$E(n, a, m) \to E(n^\prime, 0, m^\prime)$$
 
-Theorem 12: For any configuration satisfying the Reset Invariant and the conditions for Corollary 11, after applying Corollary 11, the Reset Invariant still applies.
+In other words, as long as $$n > 0$$, there exists a transition which preserves the Reset Invariant and reduces that $$n$$ value.
 
 Proof:
- * Since RI and Corollary 11 preconditions all apply we are in a config: <code>0<sup>∞</sup> X<sub>r</sub> 0100 0000<sup>k</sup> <C 101a R(m) 0<sup>∞</sup></code> with $$b(m) > 2^{r+k+1}$$
- * Applying Corollary 11, we end up in configuration: <code>0<sup>∞</sup> X<sub>r</sub> <C 1010 10<sup>2k</sup> 11 10 1a R(t) 0<sup>∞</sup></code> where $$t = m + 2^k - 1$$
- * We can rewrite as <code>0<sup>∞</sup> X<sub>r</sub> <C 1010 R(s) 0<sup>∞</sup></code> where $$s = t \cdot 2^{2k+3} + x$$ and $$x \le 2^{2k} + 2^{2k+2}$$ (To be precise $$x \in \{2^{2k}, 2^{2k} + 2^{2k+2}\}$$ depending on whether `a` is `0` or `1` respectively).
- * In order to prove that RI applies to this result we must prove that $$b(s) > 2^r$$. This is not hard to prove, but the math is a bit grungy. I will list the outline of the proof:
+ * Since $$n > 0$$, $$K(n)$$ must contain at least one `0100` block. Find the rightmost `0100` block and rewrite <code>K(n) = K(n′) 0100 0000<sup>k</sup></code> (i.e. $$n = 2^k + 2^{k+1} \cdot n^\prime$$).
+ * So, we start in <code>E(n, a, m) = 0<sup>∞</sup> K(n) <C 101a R(m) 0<sup>∞</sup> = 0<sup>∞</sup> K(n′) 0100 0000<sup>k</sup> <C 101a R(m) 0<sup>∞</sup></code>.
+ * <code>0<sup>∞</sup> K(n′) 0100 0000<sup>k</sup> <C 101a R(m) 0<sup>∞</sup> -> 0<sup>∞</sup> K(n′) <C 1010 10<sup>2k</sup> 11 1a R(t) 0<sup>∞</sup></code> (with $$t = m + 2^k - 1$$) by Corollary 12 (since $$b(m) > n > 2^k - 1$$)
+ * We can rewrite this as $$E(n^\prime, 0, m^\prime)$$ where $$m^\prime = t \cdot 2^{2k+2} + x$$ and $$x \le 2^{2k} + 2^{2k+1}$$ (To be precise $$x \in \{2^{2k}, 2^{2k} + 2^{2k+1}\}$$ depending on whether $$a$$ is `0` or `1` respectively).
+ * In order to prove that the Reset Invariant applies to this result we must prove that $$b(m^\prime) > n^\prime$$:
 
- $$ b(m) > 2^{r+k+1} > 2^k - 1 $$
+$$ \begin{array}{rcl}
+b(m^\prime) &=&   b(t \cdot 2^{2k+2} + x) = b(t) \cdot 2^{2k+2} - x \ge b(t) \cdot 2^{2k+2} - (2^{2k} + 2^{2k+1}) = 2^{2k} (4b(t) - 3) \ge b(t) \\
+b(t) &=& b(m + 2^k - 1) = b(m) - (2^k - 1) > n - 2^k + 1 = (2^k + 2^{k+1} \cdot n^\prime) - 2^k + 1 = 2^{k+1} \cdot n^\prime + 1 > n^\prime
+\end{array} $$
 
- $$ b(t) = b(m) - 2^k - 1 = 2^k (2^{r+1} - 1) + 1 > 2^{r+k} $$
+QED
 
- $$ b(t \cdot 2^{2k+3}) = b(t) \cdot 2^{2k+3} > 2^{(r+k) + (2k+3)} = 2^{r+3k+3} > x $$
+Since Theorem 13 preserves the Reset Invariant, we can apply it repeatedly until the entire left side has been consumed, at which point we are actually back in a Counter configuration ($$D(0, m^\prime)$$) and so restart the Counter Phase.
 
- $$ b(s) = b(t \cdot 2^{2k+3} + x) = b(t \cdot 2^{2k+3}) - x > 2^{r+3k+3} - (2^{2k} + 2^{2k+2}) > 2^{r+3k+1} > 2^r $$
+Corollary 14: If $$b(m) > n$$ and $$n > 0$$, then there exist $$m^\prime$$ such that:
+
+$$E(n, a, m) \to E(0, 0, m^\prime) = D(0, m^\prime)$$
+
+Proof:
+ * Starting with $$E(n, a, m)$$, we can repeatedly apply Theorem 13 as long as $$n > 0$$.
+ * Since each application reduces the value of $$n$$, at some point we much reach $$n = 0$$ (because of the [well-ordering principle](https://en.wikipedia.org/wiki/Well-ordering_principle)).
+
+QED
 
 
-### Full Reset Rule
+## Proof of Non-halting
+
+Now finally, we can bring everything together to show that that this TM alternates between the Counter and Reset phases, never halting.
+
+Theorem 15: For all $$m$$, there exists $$m^\prime$$ such that $$D(0, m) \to D(0, m^\prime)$$
+
+Proof:
+ * Let $$n = b(m)$$ and $$2^k = m + b(m)$$.
+ * $$D(0, m) \to D(n-1, 2^k - 1)$$ by Corollary 6.
+ * $$D(n-1, 2^k - 1) \to E(n, 1, 2^k)$$ by Theorem 8.
+ * Note that $$b(2^k) = 2^k > m \ge b(m) = n$$ so this satisfies the Reset Invariant. Also $$n = b(m) > 0$$ by the definition of $$b(m)$$.
+ * $$E(n, 1, 2^k) \to D(0, m^\prime)$$ by Corollary 14.
+
+QED
+
+Corollary 16: If this TM enters a config $$D(0, m)$$, it will never halt. It has entered an infinite loop.
+
+And this TM does enter such a configuration at step 608:
+ * <code>0<sup>∞</sup> <C 1010 11 10 10 10 10 11 10 11 11 10 11 0<sup>∞</sup> = D(0, 1441)</code>
+
+and thus it has entered the infinite loop and will never halt!
+
+
+## Example of Behavior
+
+To make things a little more concrete, let's look at what happens starting from the configuration $$D(0, 1441)$$:
+ * We start in the Counter Phase with $$b(1441) = 607$$ and $$1441 + 607 = 2^{11}$$, so it counts up 606 times until we are in configuration $$D(606, 2^{11} - 1)$$.
+ * Now it enters the Reset Phase in config $$E(607, 1, 2^{11})$$. Since $$607_{10} = 1001011111_2$$ has 7 1s in it's binary representation, we will apply "Corollary 12" 7 times (each time removing one "1" from the binary representation of 607. i.e. removing a `0100` from $$K(607)$$).
+
+ $$ \begin{array}{r}
+ E(607, 1, 2^{11}) &\to& E(&303,& 0, &2^{13}& + &3&) \\
+                   &\to& E(&151,& 0, &2^{15}& + &13&) \\
+                   &\to& E(& 75,& 0, &2^{17}& + &53&) \\
+                   &\to& E(& 37,& 0, &2^{19}& + &213&) \\
+                   &\to& E(& 18,& 0, &2^{21}& + &853&) \\
+                   &\to& E(&  4,& 0, &2^{25}& + &13\,668&) \\
+                   &\to& E(&  0,& 0, &2^{31}& + &874\,960&) \\
+ \end{array} $$
+
+ * Which brings us back to the Counter Phase in  $$D(0,\, 2\,148\,358\,608)$$ and the cycle continues.
