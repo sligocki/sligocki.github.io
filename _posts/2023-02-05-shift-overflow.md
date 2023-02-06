@@ -10,11 +10,8 @@ In my last post, I described the peculiar behavior of Skelet \#34. After sharing
 
 | Name | Machine | BBC # | Status |
 | :-: | :-: | -: | :- |
-| `sk9`  | `1RB1LC_1LA1RB_1LD0LA_1RE0RD_---0RB` | [12,554,268](https://bbchallenge.org/12554268) | Unknown |
-| `sk10` | `1RB0RA_0LC1RA_1RE1LD_1LC0LD_---0RB` | [3,810,716](https://bbchallenge.org/3810716) | Unknown |
 | `sk15` | `1RB---_1RC1LB_1LD1RE_1LB0LD_1RA0RC` | [2,204,428](https://bbchallenge.org/2204428) | Infinite (Proof Sketch) |
 | `sk26` | `1RB1LD_1RC0RB_1LA1RC_1LE0LA_1LC---` | [13,134,219](https://bbchallenge.org/13134219) | Infinite (Proof Sketch) |
-| `sk32` | `1RB0LD_0RC0RE_1LC0LA_1LA1RC_0RB---` | [6,957,734](https://bbchallenge.org/6957734) | Unknown |
 | `sk33` | `1RB1LC_0RC0RB_1LD0LA_1LE---_1LA1RE` | [11,896,833](https://bbchallenge.org/11896833) | Infinite (Proof Sketch) |
 | `sk34` | `1RB1LC_0RC0RB_1LD0LA_1LE---_1LA1RA` | [11,896,832](https://bbchallenge.org/11896832) | Infinite (Proven) |
 | `sk35` | `1RB1LC_0RC0RB_1LD0LA_1LE---_1LA0LA` | [11,896,831](https://bbchallenge.org/11896831) | Infinite (Proven) |
@@ -24,7 +21,7 @@ In my last post, I described the peculiar behavior of Skelet \#34. After sharing
 
 ## Machines alike Skelet \#34
 
-Four of these machines have transition tables very closely related to that of Skelet \#34. I provide rough analysis below for all 4 of these here:
+All of the Skelet machines (`sk#`) have transition tables very closely related to that of Skelet \#34. I provide rough analysis below for all of these here:
 
 
 ### Skelet \#35 (`sk35`)
