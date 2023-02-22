@@ -4,7 +4,7 @@ title: Shift Overflow Counters
 tags: busy-beaver
 ---
 
-In my last post, I described the peculiar behavior of Skelet \#34. After sharing that post on the [bbchallenge.org Discord](https://discord.gg/3uqtPJA9Uv), Justin Blanchard and @Iijil shared some interesting machines with similar looking behavior. I will call these **Shift Overflow Counters**. They seem to characterized by having a completely orderly "Counter Phase" in which they implement basic double counter until one of the sides **overflows** (expands) at which point they **shift** the block offset leading to the other side counter needing to be "reparsed" (in Skelet \#34 this shifted `1000` -> `0100`).
+In my [last post]({% post_url 2023-02-02-skelet-34 %}), I described the peculiar behavior of Skelet \#34. After sharing that post on the [bbchallenge.org Discord](https://discord.gg/3uqtPJA9Uv), Justin Blanchard and @Iijil shared some interesting machines with similar looking behavior. I will call these **Shift Overflow Counters**. They seem to characterized by having a completely orderly "Counter Phase" in which they implement basic double counter until one of the sides **overflows** (expands) at which point they **shift** the block offset leading to the other side counter needing to be "reparsed" (in Skelet \#34 this shifted `1000` -> `0100`).
 
 ## Known Examples
 
