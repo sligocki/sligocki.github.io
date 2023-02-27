@@ -13,6 +13,8 @@ The next morning, in the shower, I figured out how to construct such a Counter C
 
 $$ ... C_0 \;\; x^f \;\; D C_2 \;\; x^e \;\; D C_1 \;\; x^d \;\; D C_1 \;\; x^c \;\; D C_2 \;\; x^b \;\; DC \;\; x^a \;\;\;\; < \;\; R $$
 
+for any $$a, b, c, d, e, f \ge 0$$ (all sequences of $$x$$ can be arbitrarily long).
+
 This config does require quite a few coincidences to occur. Notably that we have five different pre-collision $D C_k$ sections lined up and timed perfectly and that there are no extraneous dots ($$D$$) not involved in such collisions. However, given infinite time it seems perfectly reasonable to imagine that the TM will eventually experience such a coincidence!
 
 
