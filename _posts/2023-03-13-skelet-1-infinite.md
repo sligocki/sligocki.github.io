@@ -211,3 +211,6 @@ All said, I think Skelet \#1 is quite a fascinating beast when it comes to analy
   4. And finally, it enters the perpetual Skelet cycle and we see that all that came before is simply an elaborate setup for this final, completely orderly behavior forever after.
 
 Up until discovering the perpetual Skelet cycle, I wasn't sure if these levels would ever end. It seemed quite possible that every time we abstracted this TM one level higher, there was just some stable cycle that formed for a time, but then broke apart into a chaotic interlude before reforming again at higher and higher and higher levels of abstraction. But no, after 3 levels of abstraction, Skelet \#1 appears to have run out of chaos.
+
+
+{% include skelet-toc.html %}

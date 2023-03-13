@@ -137,3 +137,6 @@ Non-normalized: `1RB1LC_1RE0RB_1LD0LA_1LE---_1LA1RE` (Start state `D`)
 TNF Normalized: `1RB---_1RC1LB_1LD1RE_1LB0LD_1RA0RC` (`A` -> `C` -> `E` -> `B` -> `D` -> `A`)
 
 Analysis is the same as for `sk26` except with initial condition: `Start -> D(0, 0, 1) @ Step 21`.
+
+
+{% include skelet-toc.html %}

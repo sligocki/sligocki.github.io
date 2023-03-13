@@ -165,3 +165,6 @@ w \in (x|D)^*$$.
 In other words, I think we only need 3 $$D C_k$$ coincidences and only need to exclude $$D$$s in the rightmost two segments ($$x^a$$ and $$x^b$$).
 
 I leave this as an exercise to the reader. But the basic insight here is that of the `PPaPaPP` halting signal sequence only the `PPaPa` part is critical. After that signal sequence, the right side ends in $$DDR$$ and since $$ > DDR \to < DDR $$ and $$ >P DDR \to \mbox{**Halt**}$$, halting is basically inevitable!
+
+
+{% include skelet-toc.html %}
