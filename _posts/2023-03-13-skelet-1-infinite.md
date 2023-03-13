@@ -148,7 +148,7 @@ $$\begin{array}{l}
 
 
 For any right side $$
-r \in (x|D|C)^* R$$ such that we can apply the "stride" rule $$T$$ times (let $$s^T(r)$$ be the result of doing so) and for any $$n >= P$$, then:
+r \in (x|D|C)^* R$$ such that we can apply the "stride" rule $$T$$ times (let $$s^T(r)$$ be the result of doing so) and for any $$n \ge P$$, then:
 
 @uni-cycle Rule:
 
