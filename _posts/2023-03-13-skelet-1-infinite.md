@@ -157,6 +157,8 @@ $$\begin{array}{l}
   F & J & x^{n-P} & C_1 & D & > & G & s^T(r) & \\
 \end{array} $$
 
+Note: This rule only matches and rewrites the right half of the tape. It ignores anything to the left of $$J$$ in the initial config. In other words, the rule matches any tape with a "suffix" like this.
+
 This rule can be proven by applying the rules from previous sections. It goes through exactly 9 collisions each cycle.
 
 And the real acceleration occurs when you apply this rule repeatedly. So, if $$y = \lfloor n / P \rfloor$$, $$m$$ is the max number of strides that can be applied to $$r$$ before a collision and $$z = \lfloor m / T \rfloor$$, then we can apply the @uni-cycle rule $$k = min(y, z)$$ time in a single step:
@@ -196,7 +198,7 @@ Perpetual Skelet Cycle rule:
 
 $$ K < R \to F K < R $$
 
-And thus it will repeat forever!
+As previously, this is only a suffix of the tape. It allows and ignores anything to the left of the $$K$$ in the input config. Specifically, any output config matches the input config and thus it will repeat forever!
 
 
 ## Summary
