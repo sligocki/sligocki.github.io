@@ -5,6 +5,8 @@ title: >
 tags: busy-beaver skelet
 ---
 
+> Update (13 Mar 2023): [Skelet \#1 is infinite ... we think]({% post_url 2023-03-13-skelet-1-infinite %})
+
 In my previous [Skelet \#1 post]({% post_url 2023-02-25-skelet-1-wip %}) I discussed how this TM spends most of it's time in orderly Counter Configurations interrupted occasionally by "collisions" which lead to more chaotic behavior until generally settling back into a Counter Configuration.
 
 One open question after that post was: Are there any Counter Configurations that lead to halting? If we could prove that none could, we have proven Skelet \#1 infinite. If we could find one, then maybe Skelet \#1 has a chance to halt (by eventually reaching such a counter config)!
