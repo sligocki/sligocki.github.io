@@ -355,3 +355,35 @@ D(a, 1, c) -> D(2, a, c+1)
 34 : D(1383583, 2, 0)
 35 : Qhalt
 ```
+
+
+## 6x2 Level 3 Infinite
+
+https://bbchallenge.org/1RB1LA_1RC0LE_1RD1RB_0LA0LF_1LC1LB_---1LD
+
+A TM Pavel shared on Discord which does Level 3 Collatz recurrence (like https://www.sligocki.com/2022/06/21/bb-6-2-t15.html) but none of the Collatz cases halt:
+
+```
+Let A(a, b, c) = 0^inf <A 01^a 00 10^b 1^c 0^inf
+
+Level 1:
+  A(a, b+1, c) -> A(a+2, b, c)
+  A(a, 0, c+5) -> A(1, a+5, c)
+  A(a, 0, 0) -> A(1, 2, 2a)
+  A(a, 0, 1) -> A(1, 2, 2a+4)
+  A(a, 0, 2) -> A(1, 2, 2a+6)
+  A(a, 0, 3) -> A(1, 2, 2a+8)
+  A(a, 0, 4) -> A(1, 2, 2a+10)
+
+Level 2:
+  A(a, 0, c+5) -> A(2a+11, 0, c)
+
+Level 3:
+  A(1, 2, 5k  ) -> A(1, 2, 32 2^k - 22)
+  A(1, 2, 5k+1) -> A(1, 2, 32 2^k - 18)
+  A(1, 2, 5k+2) -> A(1, 2, 32 2^k - 16)
+  A(1, 2, 5k+3) -> A(1, 2, 32 2^k - 14)
+  A(1, 2, 5k+4) -> A(1, 2, 32 2^k - 12)
+```
+
+Level 1 rules are actually all you need. The set $$\{A(a, b, c) : a, b, c \in \mathbb{N}\}$$ is closed, so once TM enters it cannot halt.
