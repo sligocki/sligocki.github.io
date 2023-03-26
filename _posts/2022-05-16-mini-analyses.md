@@ -387,3 +387,55 @@ Level 3:
 ```
 
 Level 1 rules are actually all you need. The set $$\{A(a, b, c) : a, b, c \in \mathbb{N}\}$$ is closed, so once TM enters it cannot halt.
+
+
+
+## 6x2 Level 3 Tricky Proof
+
+https://bbchallenge.org/1RB0LF_1LC1RD_1LA0RC_0RE1RB_0LC1LA_---1LE
+
+Another TM Pavel shared on Discord which also has Level 3 Collatz recurrence and some of the Collatz cases even halt! But it skillfully avoids them:
+
+```
+Let C(a, b, c) = $ 1100 (01111 1100)^a 1100 0110^b 1100^c C> 1 $
+
+@93: C(0, 0, 1)
+
+Level 1:
+  C(a, b+1, c) -> C(a, b, c+2)
+  C(a+1, 0, c) -> C(a, c+2, 2)
+
+  C(0, 0, 9k+1) -> C(4k+1, 0, 2)
+  C(0, 0, 9k+4) -> C(4k+2, 1, 2)
+  C(0, 0, 9k+7) -> C(4k+4, 0, 1)
+
+  C(0, 0, 3k+2) -> Halt
+
+Level 2:
+  C(a+1, 0, c) -> C(a, 0, 2c+6)
+  *: C(a, 0, c) -> C(0, 0, (c+6) 2^a - 6)
+
+Level 3:
+  C(0, 0, 9k+1) -> C(0, 0,  8 2^{4k+1} - 6)
+  C(0, 0, 9k+4) -> C(0, 0, 10 2^{4k+2} - 6)
+  C(0, 0, 9k+7) -> C(0, 0,  7 2^{4k+4} - 6)
+```
+
+The trick is that we can rewrite the Level 3 rules as:
+```
+  C(0, 0, 9k+1) -> C(0, 0,    4^{2k+2} - 6)
+  C(0, 0, 9k+4) -> C(0, 0, 10 4^{2k+1} - 6)
+  C(0, 0, 9k+7) -> C(0, 0,  7 4^{2k+2} - 6)
+```
+
+And since $$4^n \equiv 1 \mod 3$$ (and so do 10 and 7), the right sides will always be remainder 1 (mod 3) and so always one of remainders (1, 4, 7) mod 9.
+
+But it is delicate! A slight tweak, like `7 2^{4k+1} - 6` and this condition would not hold any longer!
+
+All of the permutations of this TM fall into the same starting config `C(0, 0, 1)` except for starting from state B in which case we reach `C(0, 0, 0)` which leads to the rule:
+
+```
+C(0, 0, 9k+0) -> C(0, 0, 10 2^{4k+1} - 7) = C(0, 0, 5 4^{2k+1} - 7)
+```
+
+But that is also guaranteed to always be remainder 1 (mod 3)! and so will never halt.
