@@ -439,3 +439,19 @@ C(0, 0, 9k+0) -> C(0, 0, 10 2^{4k+1} - 7) = C(0, 0, 5 4^{2k+1} - 7)
 ```
 
 But that is also guaranteed to always be remainder 1 (mod 3)! and so will never halt.
+
+A re-analysis which makes absorbs these coincidences is:
+
+```
+E(a, b, c) = C(2a, 3b, 3c+1) = $ 1100 {01111 1100 01111 1100}^a 1100 {0110 0110 0110}^b 1100 {1100 1100 1100}^c C> 1 $
+
+E(a, b+1, c) -> E(a, b, c+2)
+E(a+1, 0, c) -> E(a, 0, 4c+7)
+E(0, 0, 3k)   -> E(2k  , 0, 3)
+E(0, 0, 3k+1) -> E(2k+1, 0, 1)
+E(0, 0, 3k+2) -> E(2k+2, 0, 0)
+
+And Blank -> E(0, 0, 0) in 93 steps.
+```
+
+At which point we have a closed set, so presumably this TM is solveable by CTL with regular expression: `1100 (01111 1100 01111 1100)* 1100 (0110 0110 0110)* 1100 (1100 1100 1100)* C> 1`?

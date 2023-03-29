@@ -201,6 +201,14 @@ $$ K < R \to F K < R $$
 As previously, this is only a suffix of the tape. It allows and ignores anything to the left of the $$K$$ in the input config. Specifically, any output config matches the input config and thus it will repeat forever!
 
 
+## Stats
+
+Here are some stats about the Perpetual Skelet Cycle:
+
+  * Cycle Period: 8,468,569,863 base TM steps (1357 simulator steps).
+  * Cycle Offset: +107,917 base TM symbols (to the right). In other words, after each cycle, the TM moves 107,917 places to the right.
+  * Cycle start time: We do not (yet) calculate base TM steps for counter nor @uni-cycle acceleration, so I cannot tell you the number of base TM steps until this cycle starts. It's somewhere in the 50-200M simulator steps range and there are over $$10^{24}$$ counter increments (number of times the TM reaches the right end). So the number of base TM steps is definitely $$> 10^{24}$$. I'm guessing maybe around $$10^{50}$$-ish? (TM runtime seems to grow quadratically vs. tape growth).
+
 ## Summary
 
 All said, I think Skelet \#1 is quite a fascinating beast when it comes to analysis of chaotic system. It spends the majority of it's time doing orderly behavior, punctuated by chaotic interludes. Interestingly, we can see that on many different levels:
