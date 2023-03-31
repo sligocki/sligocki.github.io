@@ -455,3 +455,54 @@ And Blank -> E(0, 0, 0) in 93 steps.
 ```
 
 At which point we have a closed set, so presumably this TM is solveable by CTL with regular expression: `1100 (01111 1100 01111 1100)* 1100 (0110 0110 0110)* 1100 (1100 1100 1100)* C> 1`?
+
+
+## 6x2 Another Avoids Halt
+
+https://bbchallenge.org/1RB1RD_1LC1LF_0LD1LB_1RE0RA_1RA1RE_---1LD
+
+TM shared by @savask on Discord: https://discord.com/channels/960643023006490684/1026577255754903572/1091130641317372035
+
+```
+1RB1RD_1LC1LF_0LD1LB_1RE0RA_1RA1RE_---1LD
+
+C(a, b, c, d) = $ 1^a 10^b 1^c 01^d <C 1 $
+
+Level 1:
+  C(a, b, c+4, d) -> C(a, b, c, d+3)
+
+  C(a, b, 2, d) ->  HALT!
+
+  C(a, b+1, 0, d) -> C(a, b, 2d+5, 0)
+  C(a, b+1, 1, d) = C(0, 0, a+1, b+d+1)
+  C(a, b+1, 3, d) -> C(a, b, 2d+8, 0)
+
+  C(0, 0, 0, d) -> C(2, d, 4, 0)
+  C(0, 0, 1, d) = C(0, 0, 0, d+1)
+  C(0, 0, 3, d) -> C(0, 0, 2d+7, 0)
+
+Level 2:
+  C(a, b+1, 4k+0, 0) -> C(a, b, 6k+5, 0)
+  C(a, b+1, 4k+1, 0) -> C(0, 0, a+1, 3k+b+1)
+  C(a, b+1, 4k+2, 0) ->  HALT!
+  C(a, b+1, 4k+3, 0) -> C(a, b, 6k+8, 0)
+
+Level 3:
+  C(0, 0, 4k+1, 0) -> C(0, 0, 6k+131, 0)     for k >= 2
+  C(0, 0, 4k+3, 0) -> C(0, 0, 6k+7, 0)
+```
+
+So, you can see the "Level 3" rules are closed, but the way that `C(0, 0, 4k+1, 0) -> C(0, 0, 6k+131, 0)` is proven is wild! Basically it repeats the same sequence of "Level 2" rules each time (and they happen to never hit the `4k+2` case):
+
+```
+Proof of C(0, 0, 4k+1, 0) -> C(0, 0, 6k+131, 0):
+  C(0, 0, 4k+1, 0) -> C(0, 0, 1, 3k) = C(0, 0, 0, 3k+1)
+                   -> C(2, 3k+1,  4, 0)
+                   -> C(2, 3k+0, 11, 0)
+                   -> C(2, 3k-1, 20, 0)
+                   -> C(2, 3k-2, 35, 0)
+                   -> C(2, 3k-3, 56, 0)
+                   -> C(2, 3k-4, 89, 0)
+                   -> C(0, 0, 3, 3k+62)
+                   -> C(0, 0, 6k+131, 0)
+```
