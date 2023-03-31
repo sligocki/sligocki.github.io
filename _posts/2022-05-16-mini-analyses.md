@@ -7,7 +7,10 @@ tags: busy-beaver collatz
 I spend a lot of time doing "quick-and-dirty" analyses of new Busy Beaver champions. Recently, when I have time, I have been posting those analyses on this blog in detailed form. However, converting from my quick notes to a polished blog post is a lot of time and work and so most of my analyses don't make it. However, I think there is some value in the quick notes, so I keep them in unsaved documents in my editor until I end up with too many tabs (or my computer crashes) and eventually I delete them. As a middle ground, I've decided to try and post unpolished notes here as a value to myself if I ever come back and want to understand these machines behavior again in the future. I may add more notes here over time.
 
 
-## Pavel-e197k
+## 2022
+### May 2022
+
+#### Pavel-e197k
 
 Shared by email 15 May 2022 by Pavel Kropitz. This TM runs >10^197,282 steps leaving >10^98,641 symbols.
 
@@ -29,7 +32,7 @@ Rule 7: `0^inf 01^2k+1 D> 0^inf  ->  Halt(10 2^(5 2^(10 2^k - 4) - 4) - 5)`
 At step 9, it's in config `0^inf 01^3 D> 0^inf` -> `Halt(10 2^(5 2^16 - 4) - 4)`
 
 
-# Machine Adjacent to Pavel-e197k
+#### Machine Adjacent to Pavel-e197k
 
 While analyzing 6x2 machines "adjacent" to Pavel-e197k, I found this machine which our filters do not appear to be able to categorize:
 
@@ -50,7 +53,7 @@ Rule 5b: `100 10^2k+1 01^2 D> -> 10010 01^3k+2 D> -> 100 10^3k+5 01^2 D>`
 At step 20, it's in config `100 01^2 D>` at which point Rules 4/5 a/b will apply forever, so this is infinite (but our system is not smart enough to know that).
 
 
-# Machine Adjacent to e78k
+#### Machine Adjacent to e78k
 
 While analyzing 6x2 machines "adjacent" to the short-lived 6x2 champion I announced on Friday (which runs for >10^78913 steps), I found exactly one machine (with 3 different permutations of start state) which our filters aren't able to categorize. This is the same as my 6x2 former champion except with `A1 -> 1RA`.
 
@@ -63,7 +66,7 @@ a2: ` 0001 <E 0101^a 1^3k+2 00  ->  1 <E 0101 1^4a+2 001^k 1`
 Once this machine gets into a tape matching regular expression `0^inf 1 <E (0101)+ (00|1)* 0^inf` it will never leave. Thus these machines are infinite.
 
 
-# Swapping Rules
+#### Swapping Rules
 
 `1RB 1RF  1LC 1LB  --- 0LD  1LE 1LF  1RE 1LD  0RF 0RA`
 
@@ -77,7 +80,7 @@ Rule 1:  `01 11^a 10 C> 01^b 11 -> 01 11^b-2 10 C> 01^a+4 11`
 Rule 1x: `01 11^a 10 C> 01^b 11 -> 01 11^a+2 10 C> 01^b+2 11 -> Infinite`
 
 
-# Three Stage Rules
+#### Three Stage Rules
 
 `1RB 1LE  1LC ---  1RD 1LB  1LF 0LE  0LD 1RF  0RE 0RA`
 
@@ -148,7 +151,9 @@ Rule 3:  C(a, 0, c) -> C(0, a+1, 2c) -> C(a+1, 0, c 2^b+1)
 Rule 3x: C(a, 0, c) -> Infinite
 
 
-# Halting 6x2
+### June 2022
+
+#### Halting 6x2
 
 `1RB 0LE  0RC 1RF  1RD 0RB  1LA 1RB  1LA 0LD  1RA 1RZ`
 
@@ -304,7 +309,9 @@ Repeat forever:
 ```
 
 
-### 5x2 Qhalt
+### Oct 2022
+
+#### 5x2 Qhalt
 
 This is the latest Quasihalting TM I've found in 5x2 with at least 1 undefined transition (i.e. it's part of the BB(5, 2) search).
 
@@ -357,7 +364,10 @@ D(a, 1, c) -> D(2, a, c+1)
 ```
 
 
-## 6x2 Level 3 Infinite
+## 2023
+### March 2023
+
+#### 6x2 Level 3 Infinite
 
 https://bbchallenge.org/1RB1LA_1RC0LE_1RD1RB_0LA0LF_1LC1LB_---1LD
 
@@ -390,7 +400,7 @@ Level 1 rules are actually all you need. The set $$\{A(a, b, c) : a, b, c \in \m
 
 
 
-## 6x2 Level 3 Tricky Proof
+#### 6x2 Level 3 Avoids Halt
 
 https://bbchallenge.org/1RB0LF_1LC1RD_1LA0RC_0RE1RB_0LC1LA_---1LE
 
@@ -457,7 +467,7 @@ And Blank -> E(0, 0, 0) in 93 steps.
 At which point we have a closed set, so presumably this TM is solveable by CTL with regular expression: `1100 (01111 1100 01111 1100)* 1100 (0110 0110 0110)* 1100 (1100 1100 1100)* C> 1`?
 
 
-## 6x2 Another Avoids Halt
+#### 6x2 Another Avoids Halt
 
 https://bbchallenge.org/1RB1RD_1LC1LF_0LD1LB_1RE0RA_1RA1RE_---1LD
 
