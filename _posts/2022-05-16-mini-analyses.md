@@ -516,3 +516,212 @@ Proof of C(0, 0, 4k+1, 0) -> C(0, 0, 6k+131, 0):
                    -> C(0, 0, 3, 3k+62)
                    -> C(0, 0, 6k+131, 0)
 ```
+
+
+### April 2023
+#### 3x3 Linear Rules
+Among my 3x3 holdouts there are 8 that I can prove Linear Rules for:
+
+```
+Group A:
+  1RB2RB1RC_1LC0LA---_1RA2LC1LB
+  1RB0RC---_1LC2RB1RA_1LA2LA1LB
+  1RB2LA1LC_1RC2RC1RA_1LA0LB---
+
+Group B:
+  1RB---2RA_0RC1RA0RB_2LC2LB0LA
+  1RB2RA---_0RC2LB2RB_1LC0LA0RB
+  1RB0RA---_0RC2LB2RB_1LC0LA0RB
+
+Group C:
+  1RB2LB2LA_1LA2RC1LB_---2RB0LB
+1RB1LA2LA_1LA2RC1LB_---2RB0LB
+```
+
+##### Group A
+
+```
+1RB2RB1RC_1LC0LA---_1RA2LC1LB
+
+$ 1 11^a A> 22 _    -> $ 1 11^a+2 A> _
+$ 1 11^a A> 21 _    -> $ 1 A> 22^a+1 2 _
+$ 1 11^a A> 2000 _  -> $ 1 A> 22^a+2 1 _
+$ 1 11^a A> 10 _    -> $ 1 A> 2 1^2a+1 _
+
+A(a, b, c) = $ 1 11^a C> 2^b 1^c $
+
+Level 1:
+  A(a, b+2, c)    -> A(a+2, b, c)
+  A(a, 1,   c+1)  -> A(0, 2a+3, c)
+  A(a, 1,   0)    -> A(0, 2a+4, 1)
+  A(a, 0,   1)    -> A(0, 1, 2a+1)
+
+Level 2:
+  A(a, 2k+r, c) -> A(a+2k, r, c)
+  A(0, 2k+1, c+1) -> A(0, 4k+3, c)   4k+3 = 2 (2k+1) + 1
+  A(0, 2k, 1) -> A(0, 1, 4k+1)
+
+Level 3:
+  A(0, 1, c) -> A(0, 2^c+1 - 1, 0)
+             -> A(2^c+1 - 2, 1, 0)
+             -> A(0, 2^c+2, 1)
+             -> A(0, 1, 2^c+3 + 1)   [Infinite Rule]
+
+Starts in A(0, 1, 1) @4
+```
+
+The next two are just permutations of the first with start configs:
+
+```
+1RB0RC---_1LC2RB1RA_1LA2LA1LB  :  Starts in A(0, 1, 3) @10
+1RB2LA1LC_1RC2RC1RA_1LA0LB---  :  Starts in A(0, 1, 7) @38
+```
+
+##### Group B
+
+These are not permutations of each other, but do share a lot of rules
+
+```
+1RB---2RA_0RC1RA0RB_2LC2LB0LA
+
+  _ 22 0^c C> $ -> _ 0^c+6 C> $
+  _ 01 0^c C> $ -> _ 1^c+2 0 C> $
+  _ 11 0^c C> $ -> _ 1 2^c+1 0^5 C> $
+
+D(a, b, c) = $ 1^a+1 2^2b 0^2c+1 C> $
+
+Level 1 (Closed Set):
+  D(a, b+1, c) -> D(a, b, c+3)
+  D(a+1, 0, c) -> D(a, c+1, 2)
+  D(0, 0, c) -> D(2c+2, 0, 0)
+
+Level 2:
+  D(a, b, c) -> D(a, 0, c+3b)
+  D(a+1, 0, c) -> D(a, 0, 3c+5)
+  D(a, 0, c) -> D(0, 0, (c+5/2) 3^a - 5/2)
+
+Level 3:
+  D(0, 0, c) -> D(0, 0, 5/2 (3^2c+2 - 1))   [Infinite Rule]
+
+Starts in D(0, 0, 0) @2
+```
+
+Next: 1RB2RA---_0RC2LB2RB_1LC0LA0RB
+
+```
+1RB2RA---_0RC2LB2RB_1LC0LA0RB
+
+  _  2 0^c C> 00 _ -> _ 0^c+3 C> _
+  _ 01 0^c C> 0  _ -> _ 1^c+2 0 C> _
+  _ 11 0^c C> 00 _ -> _ 2^c+3 0 C> _
+
+C(a, b, c) = $ 1^a 2^b 0^c C> $
+
+Level 1 (Closed Set):
+  C(a,   b+1, c)  ->  C(a,   b,   c+3)
+  C(a+2, 0,   c)  ->  C(a,   c+3, 1)
+  C(1,   0,   c)  ->  C(c+2, 0,   1)
+  C(0,   0,   c)  ->  Inf Translated Cycle
+
+Starts in C(1, 0, 1) @2
+```
+
+Note that we can even prove that this TM never reaches the `C(0, 0, c)` transition:
+```
+Level 2:
+  C(a,   b, c)  ->  C(a, 0, c+3b)
+  C(a+2, 0, c)  ->  C(a, 0, 3c+10)
+
+Level 3:
+  C(2k+1, 0, 1) -> C(1, 0, 6 3^k - 5)
+                -> C(6 3^k - 3, 0, 1)   [Infinite Rule]
+```
+
+
+Next: 1RB0RA---_0RC2LB2RB_1LC0LA0RB is very similar to the previous one.
+
+```
+1RB0RA---_0RC2LB2RB_1LC0LA0RB
+
+  _  2 0^c C> 00 _ -> _ 0^c+3 C> _
+  _ 01 0^c C> 0  _ -> _ 1^c+2 0 C> _
+  _ 11 0^c C> 00 _ -> _ 00 2^c+1 0 C> _
+
+C(a, b, c) = $ 1^a 00 2^b 0^c C> $
+
+Level 1 (Closed Set):
+  C(a,   b+1, c)  ->  C(a,   b,   c+3)
+  C(a+2, 0,   c)  ->  C(a,   c+3, 1)
+  C(1,   0,   c)  ->  C(c+2, 2,   1)
+  C(0,   0,   c)  ->  Inf Translated Cycle
+
+Starts in C(1, 2, 1) @27
+```
+
+Like the last TM we have rules:
+```
+Level 2:
+  C(a, b, c)  ->  C(a, 0, c+3b)
+  C(a+2, 0, c)  ->  C(a, 0, 3c+10)
+
+Level 3:
+  C(2k+1, 2, 1) -> C(2k+1, 0, 7)
+                -> C(1, 0, 12 3^k - 5)
+                -> C(12 3^k - 3, 2, 1)   [Infinite Rule]
+```
+
+##### Group C
+
+```
+1RB2LB2LA_1LA2RC1LB_---2RB0LB
+
+  _  00 <A 11^n 22 _ -> _ <A 11^n+2 _
+  _   0 <A 11^n 12 _ -> _ <A 22^n+1 1 _
+  _ 000 <A 11^n 0  _ -> _ <A 22 1 2^2n 1 _
+
+A(a, b, c) = $ <A 11^a 22^b 1 2^c 1 $
+
+Level 1 (Closed Set):
+  A(a, b+1, c)    ->  A(a+2, b,   c)
+  A(a, 0,   c+1)  ->  A(0,   a+1, c)
+  A(a, 0,   0)    ->  A(0,   1,   2a+2)
+
+Level 2:
+  A(a, b, c)  ->  A(a+2b, 0, c)
+  A(a, 0, c+1) -> A(2a+2, 0, c)
+
+Level 3:
+  A(a, 0, c) -> A((a+2) 2^c - 2, 0, 0)
+             -> A(0, 1, (a+2) 2^c+1 - 2)
+             -> A(2, 0, (a+2) 2^c+1 - 2)   [Infinite Rule]
+
+Starts at A(0, 0, 1) @3
+```
+
+And the last TM is extremely similar, but with a small tweak to the `A(a, 0, 0)` rule.
+
+```
+1RB1LA2LA_1LA2RC1LB_---2RB0LB
+
+  _  00 <A 11^n  22 _ -> _ <A 11^n+2 _
+  _   0 <A 11^n  12 _ -> _ <A 22^n+1 1 _
+  _  00 <A 11^n+1 0 _ -> _ <A 22 1 2^2n+1 1 _
+
+A(a, b, c) = $ <A 11^a 22^b 1 2^c 1 $
+
+Level 1 (Closed Set):
+  A(a, b+1, c)    ->  A(a+2, b,   c)
+  A(a, 0,   c+1)  ->  A(0,   a+1, c)
+  A(a, 0,   0)    ->  A(0,   1,   2a+1)
+
+Level 2:
+  A(a, b, c)  ->  A(a+2b, 0, c)
+  A(a, 0, c+1) -> A(2a+2, 0, c)
+
+Level 3:
+  A(a, 0, c) -> A((a+2) 2^c - 2, 0, 0)
+             -> A(0, 1, (a+2) 2^c+1 - 3)
+             -> A(2, 0, (a+2) 2^c+1 - 3)   [Infinite Rule]
+
+Starts at A(0, 0, 0) @3
+```
