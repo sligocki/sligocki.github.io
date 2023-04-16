@@ -725,3 +725,31 @@ Level 3:
 
 Starts at A(0, 0, 0) @3
 ```
+
+#### 6x2 Mixed Exponential and Add
+
+```
+1RB0RD_0RC0RA_1LD0LC_1LE1LB_0RE0LF_1LA---
+
+  $ 01^a  B> 0110 -> $ 01^a+4 B>
+  $ 01^2a+2 B> 00 -> $ 01^3 B> 0110^a 011
+  $ 01^2a+1 B> 00 -> $ 01^2 B> 110 0110^a 011
+
+B(a, b, c) = $ 0101^a B> 110 10^b+1 0110^d $
+C()
+
+Closed Set:
+  B(a, b, c+1) -> B(4a+5, b+1, c-1)
+  B(a, b, 0)   -> B(7, 0, a+2b+2)
+
+Starts in B(7, 0, 3) @405
+```
+
+This proof (by closed set) is complete, but if you try to evaluate the trajectory here, it's slightly more interesting:
+
+```
+B(7, 0, c) -> B((7 + 5/3) 4^c - 5/3, c, 0)
+           -> B(7, 0, (26 4^c + 1)/3 + 2c)
+```
+
+So we are recursing the map `c -> (26 4^c + 1)/3 + 2c` which has both exponential and addition.
