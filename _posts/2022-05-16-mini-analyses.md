@@ -753,3 +753,47 @@ B(7, 0, c) -> B((7 + 5/3) 4^c - 5/3, c, 0)
 ```
 
 So we are recursing the map `c -> (26 4^c + 1)/3 + 2c` which has both exponential and addition.
+
+
+#### 6x2 ExpInt close
+
+```
+1RB0RC_1LC1RA_1RE1RD_1LF0RB_---1LA_1LB0LD
+
+Rules:
+  00^inf 10 11^f 10^g 11^h-1 01^i+2 (01) D> 00^inf
+  00^inf 10 11^(j - 1) 10^(k + 2) 11^1 01^(2 l + 4) (01) D> 00^inf
+
+
+       11 01^c D> $ -> 01^c+2 D> $
+  11 10^b 01^c D> $ -> 10^b+2 11^c 01 D> $
+    11 01^a A> 10^2 -> 01^a+3 A>
+
+
+D(a, b, c, d) = $ 10 11^a 10^b 11^c 01^d D> $
+
+Level 1:
+  D(a, b, c+1, d) -> D(a, b, c, d+2)
+  D(a, b, 0, d) -> D(a-1, b+2, d, 1)
+  D(0, b, 0, d) -> D(3b+5, 3, d-2b-5, 1)   (Assuming d > 2b+5)
+
+Level 2:
+  D(a, b, c, d) -> D(a, b, 0, d+2c)
+  D(a, b, 0, d) -> D(a-1, b+2, 0, 2d+1)
+  D(0, b, 0, d) -> D(3b+5, 3, 0, 2d-4b-9)
+
+Level 3:
+  D(a, b, 0, d) -> D(0, b+2a, 0, (d+1) 2^a - 1)
+  D(0, b, 0, d) -> D(0, 6b+13, 0, (d-2b-4) 2^(3b+6) - 1)   [Infinite rule]
+
+Starts at D(0, 0, 3, 1) @35
+```
+
+The last rule is infinite (b/c $$d > b$$ remains true forever), but the sequence produces progressively more and more complicated terms:
+
+```
+D(0, 0, 0, 7)
+D(0, 13, 0, 3 2^6 - 1)
+D(0, 7*13, 0, (3 2^6 - 31) 2^45 - 1)
+D(0, 13(1+6+6^2), 0, ((3 2^6 - 31) 2^45 - 187) 2^279 - 1)
+```
