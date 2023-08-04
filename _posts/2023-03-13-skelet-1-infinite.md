@@ -5,6 +5,8 @@ title: >
 tags: busy-beaver skelet
 ---
 
+> Updated 3 Aug 2023: Fixed the `x F3 <` transition and the raw tape representation of F3. Thanks to Discord user @Maya for noticing the mistakes. These were correct in our simulator so do not change any of our results, but I transcribed them incorrectly into this page.
+
 At the end of my [original Skelet \#1 post]({% post_url 2023-02-25-skelet-1-wip %}), I listed my ideas on ways to move forward. Third on the list was working on an accelerated simulator. Pavel Kropitz built a custom simulator for this TM using the Counter Notation (with Parity Change) I mentioned in that article. They also added Counter acceleration using the rule I listed in that article and I added @uni-cycle acceleration. Together, all of these custom optimizations, we were able to run the simulation long enough that it reached an infinite cycle! So we believe we have demonstrated that this TM is infinite (in fact, that it is a [Translated Cycler](https://discuss.bbchallenge.org/t/decider-translated-cyclers/34) / is Lin Recurrent).
 
 But since this requires running our custom simulator over $$2^{26}$$ (over 60M) simulator steps and no other existing simulator is able to run nearly this long, I feel somewhat reluctant to claim certainty that we do not have a bug in our simulation! In order to confirm this TMs behavior it would be great if someone else could independently implement a simulator so that we could compare the results. Towards that end, I will provide all the theory that I think anyone would need to implement such an accelerated simulator.
@@ -32,7 +34,7 @@ Such a string represents a specific TM configuration. To decode it to a basic TM
 |                | $$F_0$$     | `432`  |    `01111 0111 011` |           |
 |                | $$F_1$$     | `401`  |        `01111 0 01` |           |
 |                | $$F_2$$     | `62`   |       `0111111 011` |           |
-|                | $$F_3$$     | `31`   |    `011 011111 011` |           |
+|                | $$F_3$$     | `31`   |           `0111 01` |           |
 |                | $$G_0$$     | `2332` | `011 0111 0111 011` |           |
 |                | $$G_1$$     | `2301` |     `011 0111 0 01` |           |
 |                | $$G_2$$     | `252`  |    `011 011111 011` |           |
@@ -70,7 +72,7 @@ C_2 & > & C   &   & \to &   & F_0   & > \\
     &   & F_0 & < & \to &   & F_1 x & > \\
     &   & F_1 & < & \to &   & F_2   & > \\
     &   & F_2 & < & \to &   & F_3 x & > \\
-    & & x F_3 & < & \to & < & P C D &   \\
+    & & x F_3 & < & \to &   & P C_1 D & > \\
 \\
 C_0 & > & C   &   & \to &   & G_0   & > \\
     &   & G_0 & < & \to &   & G_1 x & > \\
