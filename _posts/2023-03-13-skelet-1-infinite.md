@@ -5,7 +5,7 @@ title: >
 tags: busy-beaver skelet
 ---
 
-> Updated 3 Aug 2023: Fixed the `x F3 <` transition and the raw tape representation of F3. Thanks to Discord user @Maya for noticing the mistakes. These were correct in our simulator so do not change any of our results, but I transcribed them incorrectly into this page originally.
+> Updated 6 Aug 2023: Maja Kądziołka [verified this result in Coq](https://discuss.bbchallenge.org/t/skelet-1-is-a-translated-cycler-coq-agrees/166)! In the process she found several transcription errors in this post, which have been fixed.
 
 At the end of my [original Skelet \#1 post]({% post_url 2023-02-25-skelet-1-wip %}), I listed my ideas on ways to move forward. Third on the list was working on an accelerated simulator. Pavel Kropitz built a custom simulator for this TM using the Counter Notation (with Parity Change) I mentioned in that article. They also added Counter acceleration using the rule I listed in that article and I added @uni-cycle acceleration. Together, all of these custom optimizations, we were able to run the simulation long enough that it reached an infinite cycle! So we believe we have demonstrated that this TM is infinite (in fact, that it is a [Translated Cycler](https://discuss.bbchallenge.org/t/decider-translated-cyclers/34) / is Lin Recurrent).
 
