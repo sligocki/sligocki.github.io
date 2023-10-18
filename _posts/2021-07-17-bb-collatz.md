@@ -223,4 +223,4 @@ Of course, there is a selection bias here. We are searching for the TMs that run
 
 ## Use For TM Simulation Acceleration
 
-I find that modeling a TM by Collatz-like behavior gives me a personal feeling of insight into what it's doing. But in addition to that value, our software also uses this behavior to significantly accelerate simulation of long-running TMs. Without it we would never be able to simulate TMs like the current `BB(6, 2)` [champion](https://webusers.imj-prg.fr/~pascal.michel/bbc.html) which runs for <code> >10<sup>36,534</sup></code> steps!
+I find that modeling a TM by Collatz-like behavior gives me a personal feeling of insight into what it's doing. But in addition to that value, our software also uses this behavior to significantly accelerate simulation of long-running TMs. Without it we would never be able to simulate TMs like the current `BB(6, 2)` [champion](https://bbchallenge.org/~pascal.michel/bbc.html) which runs for <code> >10<sup>36,534</sup></code> steps!

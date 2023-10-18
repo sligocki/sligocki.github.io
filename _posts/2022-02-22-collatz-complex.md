@@ -4,7 +4,7 @@ title: BBB Complex Collatz-like Behavior
 tags: busy-beaver collatz
 ---
 
-Almost all existing Busy Beaver champions (and runner ups) exhibit Collatz-like behavior. Pascal Michel has a [large collection](https://webusers.imj-prg.fr/~pascal.michel/beh.html) of these analyses for existing and previous BB champions. I previously [analyzed the BBB(4, 2) champion]({% post_url 2021-07-17-bb-collatz %}) (it is still the reigning champion 7 months later) which fit into the Collatz-like model in a pleasingly simple way. Today, I'll be analyzing my newly discovered [BBB(5, 2) champion]({% post_url 2021-07-17-bb-collatz %}) which runs for over 10<sup>502</sup> steps before quasihalting. This machine exhibits more complex behavior, but still, it is not ["Spaghetti Code"](https://nickdrozd.github.io/2021/01/26/spaghetti-code-conjecture.html).
+Almost all existing Busy Beaver champions (and runner ups) exhibit Collatz-like behavior. Pascal Michel has a [large collection](https://bbchallenge.org/~pascal.michel/beh.html) of these analyses for existing and previous BB champions. I previously [analyzed the BBB(4, 2) champion]({% post_url 2021-07-17-bb-collatz %}) (it is still the reigning champion 7 months later) which fit into the Collatz-like model in a pleasingly simple way. Today, I'll be analyzing my newly discovered [BBB(5, 2) champion]({% post_url 2021-07-17-bb-collatz %}) which runs for over 10<sup>502</sup> steps before quasihalting. This machine exhibits more complex behavior, but still, it is not ["Spaghetti Code"](https://nickdrozd.github.io/2021/01/26/spaghetti-code-conjecture.html).
 
 ## The Machine
 

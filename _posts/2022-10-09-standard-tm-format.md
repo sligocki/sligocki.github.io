@@ -13,7 +13,7 @@ I will be using a new standard one-line TM text format for all of my TM examples
 ```
 
 Which represents the 3 TMs:
- * My dad and my reigning 2-state, 4-symbol Busy Beaver champion (See [Pascal Michel's historical survey](https://webusers.imj-prg.fr/~pascal.michel/ha.html#tm24)).
+ * My dad and my reigning 2-state, 4-symbol Busy Beaver champion (See [Pascal Michel's historical survey](https://bbchallenge.org/~pascal.michel/ha.html#tm24)).
  * Pavel's reigning 6-state, 2-symbol Busy Beaver champion (See [BB(6, 2) > 10↑↑15]({% post_url 2022-06-21-bb-6-2-t15 %})).
  * A 5-state, 2-symbol TM which prints Sierpinski triangles found by bbchallenge.org Discord user @lijil (See visualization at [bbchallenge](https://bbchallenge.org/1RB1RC_1RC1RB_1LD0RA_---1LE_0LD0LA)).
 
