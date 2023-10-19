@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: The WikiTree Network Definition
 date: 2021-06-24 02:00:00 -04:00
 tags: wikitree_network

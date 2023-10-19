@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: BB Counters and Proof by Induction
 tags: busy-beaver
 ---

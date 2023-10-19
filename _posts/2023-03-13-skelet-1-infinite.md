@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: >
   Skelet #1 is infinite ... we think
 tags: busy-beaver skelet

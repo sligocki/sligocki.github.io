@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: WikiTree Network Corner Cases
 date: 2021-06-24 19:00:00 -04:00
 tags: wikitree_network

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Sing me a song, you're the Collatz man
 tags: collatz
 ---

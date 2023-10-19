@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Standard TM Text Format
 tags: busy-beaver
 ---

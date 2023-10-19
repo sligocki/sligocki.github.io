@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: WikiTree and Network Theory
 tags: wikitree_network
 ---

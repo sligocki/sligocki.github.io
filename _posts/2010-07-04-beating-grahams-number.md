@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Beating Graham's Number
 tags: big-number-notation busy-beaver
 ---

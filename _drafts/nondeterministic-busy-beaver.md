@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Nondeterministic Busy Beaver
 tag: busy-beaver
 ---

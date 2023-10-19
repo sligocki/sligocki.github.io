@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: The Human Kinship Network
 tags: wikitree_network
 ---

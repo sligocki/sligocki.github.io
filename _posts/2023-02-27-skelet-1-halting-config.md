@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: >
   Skelet #1: A Halting Counter Config
 tags: busy-beaver skelet

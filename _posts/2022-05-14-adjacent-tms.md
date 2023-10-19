@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Adjacent Turing Machines (and my Busy Beaver Origin Story)
 tags: busy-beaver
 ---

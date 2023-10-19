@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Shift Overflow Counters
 tags: busy-beaver skelet
 ---

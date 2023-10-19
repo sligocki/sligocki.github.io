@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Beeping Busy Beaver
 tag: busy-beaver
 permalink: /2021/03/06/beeping-busy-beaver/

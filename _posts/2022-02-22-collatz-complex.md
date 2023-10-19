@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: BBB Complex Collatz-like Behavior
 tags: busy-beaver collatz
 ---

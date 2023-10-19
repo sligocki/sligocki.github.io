@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Busy Beavers and Recurrence Relations
 tags: busy-beaver collatz
 ---

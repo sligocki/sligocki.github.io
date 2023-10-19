@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Collatz-like behavior of Busy Beavers
 tags: busy-beaver collatz
 ---

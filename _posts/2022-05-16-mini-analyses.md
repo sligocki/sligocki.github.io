@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Mini Analyses
 tags: busy-beaver collatz
 ---

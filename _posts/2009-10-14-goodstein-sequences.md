@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Goodstein Sequences
 tags: big-number-notation
 ---

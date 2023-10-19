@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: BBB(5, 2) Search Results
 tag: busy-beaver
 ---

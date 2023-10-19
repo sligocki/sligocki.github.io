@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Green Numbers
 tags: busy-beaver big-number-notation
 ---

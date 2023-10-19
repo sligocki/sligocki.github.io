@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: WikiTree Network Degree Distribution
 tags: wikitree_network
 ---
