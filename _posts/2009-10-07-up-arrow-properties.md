@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-custom
 title: Up-arrow Properties
 tags: big-number-notation
 ---
