@@ -4,17 +4,19 @@ title: Shift Overflow Counters
 tags: busy-beaver skelet
 ---
 
+> Update: 30 Jan 2024: Jason Yuen (@int-y1) and Maja Kądziołka (@meithecatte) have proven all 5 of these Shift Overflow Counters and formalized the results in Coq! See (Coq Proof) links below in the table for details.
+
 In my [last post]({% post_url 2023-02-02-skelet-34 %}), I described the peculiar behavior of Skelet \#34. After sharing that post on the [bbchallenge.org Discord](https://discord.gg/3uqtPJA9Uv), Justin Blanchard and @Iijil shared some interesting machines with similar looking behavior. I will call these **Shift Overflow Counters**. They seem to characterized by having a completely orderly "Counter Phase" in which they implement basic double counter until one of the sides **overflows** (expands) at which point they **shift** the block offset leading to the other side counter needing to be "reparsed" (in Skelet \#34 this shifted `1000` -> `0100`).
 
 ## Known Examples
 
 | Name | Machine | BBC # | Status |
 | :-: | :-: | -: | :- |
-| `sk15` | `1RB---_1RC1LB_1LD1RE_1LB0LD_1RA0RC` | [2,204,428](https://bbchallenge.org/2204428) | Infinite (Proof Sketch) |
-| `sk26` | `1RB1LD_1RC0RB_1LA1RC_1LE0LA_1LC---` | [13,134,219](https://bbchallenge.org/13134219) | Infinite (Proof Sketch) |
-| `sk33` | `1RB1LC_0RC0RB_1LD0LA_1LE---_1LA1RE` | [11,896,833](https://bbchallenge.org/11896833) | Infinite (Proof Sketch) |
-| `sk34` | `1RB1LC_0RC0RB_1LD0LA_1LE---_1LA1RA` | [11,896,832](https://bbchallenge.org/11896832) | Infinite (Proven) |
-| `sk35` | `1RB1LC_0RC0RB_1LD0LA_1LE---_1LA0LA` | [11,896,831](https://bbchallenge.org/11896831) | Infinite (Proven) |
+| `sk15` | `1RB---_1RC1LB_1LD1RE_1LB0LD_1RA0RC` | [2,204,428](https://bbchallenge.org/2204428) | Infinite ([Coq Proof](https://discuss.bbchallenge.org/t/skelet-26-and-15-do-not-halt-coq-proof/183)) |
+| `sk26` | `1RB1LD_1RC0RB_1LA1RC_1LE0LA_1LC---` | [13,134,219](https://bbchallenge.org/13134219) | Infinite ([Coq Proof](https://discuss.bbchallenge.org/t/skelet-26-and-15-do-not-halt-coq-proof/183)) |
+| `sk33` | `1RB1LC_0RC0RB_1LD0LA_1LE---_1LA1RE` | [11,896,833](https://bbchallenge.org/11896833) | Infinite ([Coq Proof](https://discuss.bbchallenge.org/t/skelet-33-doesnt-halt-coq-proof/180)) |
+| `sk34` | `1RB1LC_0RC0RB_1LD0LA_1LE---_1LA1RA` | [11,896,832](https://bbchallenge.org/11896832) | [Infinite]({% post_url 2023-02-02-skelet-34 %}) ([Coq Proof](https://discuss.bbchallenge.org/t/skelet-34-and-35-coq-proof/165)) |
+| `sk35` | `1RB1LC_0RC0RB_1LD0LA_1LE---_1LA0LA` | [11,896,831](https://bbchallenge.org/11896831) | Infinite ([Coq Proof](https://discuss.bbchallenge.org/t/skelet-34-and-35-coq-proof/165)) |
 | `h19k` | `1RB1LD_1RC0RB_1LA0LE_1LC0LA_1RZ1RB` | [Link](https://bbchallenge.org/1RB1LD_1RC0RB_1LA0LE_1LC0LA_1RZ1RB&s=30000) | Halt in 19283 steps |
 | `h24k` | `1RB1LD_1RC0RB_1LA1LE_1LC0LA_1RZ0RD` | [Link](https://bbchallenge.org/1RB1LD_1RC0RB_1LA1LE_1LC0LA_1RZ0RD&s=30000) | Halt in 24567 steps |
 
