@@ -17,7 +17,7 @@ $$ ... C_0 \;\; x^f \;\; D C_2 \;\; x^e \;\; D C_1 \;\; x^d \;\; D C_1 \;\; x^c 
 
 for any $$a, b, c, d, e, f \ge 0$$ (all sequences of $$x$$ can be arbitrarily long).
 
-This config does require quite a few coincidences to occur. Notably that we have five different pre-collision $D C_k$ sections lined up and timed perfectly and that there are no extraneous dots ($$D$$) not involved in such collisions. However, given infinite time it seems perfectly reasonable to imagine that the TM will eventually experience such a coincidence!
+This config does require quite a few coincidences to occur. Notably that we have five different pre-collision $$D C_k$$ sections lined up and timed perfectly and that there are no extraneous dots ($$D$$) not involved in such collisions. However, given infinite time it seems perfectly reasonable to imagine that the TM will eventually experience such a coincidence!
 
 
 ## Counter Notation
@@ -155,7 +155,7 @@ Which is basically the config I listed.
 
 ## Simpler Halting Config
 
-We can simply the config needed to reach halt a bit further to:
+We can simplify the config needed to reach halt a bit further to:
 
 $$ ... \;\; D C_1 \;\; w \;\; D \;\; x^c \;\; D C_2 \;\; x^b \;\; DC \;\; x^a \;\;\;\; < R $$
 
