@@ -16,7 +16,7 @@ Almost all existing Busy Beaver champions (and runner ups) exhibit Collatz-like 
 |  D  | 0RE | 1RD |
 |  E  | 1LE | 1LA |
 
-`1RB 1LC  1RC 0RD  0LB 0RC  0RE 1RD  1LE 1LA`
+`1RB1LC_1RC0RD_0LB0RC_0RE1RD_1LE1LA`
 
 As discussed in my announcement, it runs > 10<sup>502</sup> steps before quasihalting. At that number of steps (> a googol<sup>5</sup>) it is impossible to simulate directly. The only option we have for analyzing this machine is by finding patterns in it's behavior that allow us to exponentially accelerate our simulation of it.
 
@@ -73,7 +73,7 @@ OK, but what happens when `n < 3`? Well now we have to consider the details of w
 
 `0 f(1, m)` -> `10 f(m, 2)` in `m + 6` steps.
 
-Proof: 
+Proof:
 
 |     Step # |         Left tape |   State   | Right tape                  |
 | ---------: | ----------------: | :-------: | :-------------------------- |

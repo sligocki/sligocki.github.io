@@ -19,7 +19,7 @@ This Turing Machine is defined by the transition table:
 |  C  | 1LC | 1LA |
 |  D  | 0RC | 0RD |
 
-Or `1RB 1LD  1RC 1RB  1LC 1LA  0RC 0RD` in the one-line format that Nick and I use.
+Or `1RB1LD_1RC1RB_1LC1LA_0RC0RD` in the [Standard Text format]({% post_url 2022-10-09-standard-tm-format %}).
 
 You can see how it performs [in an online simulator](http://turingmachinesimulator.com/shared/hrtjbntayc) or using my [Visual_Simulator](https://github.com/sligocki/busy-beaver/blob/master/Code/Visual_Simulator) which looks like:
 

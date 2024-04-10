@@ -18,7 +18,7 @@ This search has been very fruitful in the 5-state, 2-symbol search I would like 
 |  D  | 0RE | 1RD |
 |  E  | 1LE | 1LA |
 
-`1RB 1LC  1RC 0RD  0LB 0RC  0RE 1RD  1LE 1LA`
+`1RB1LC_1RC0RD_0LB0RC_0RE1RD_1LE1LA`
 
 which I calculate as quasihalting on step:
 
@@ -56,7 +56,7 @@ Nick, you might be curious to know that this machine is also a [Blanking Beaver]
 |  D  | 1LD | 1LA |
 |  E  | 0LB | 0RE |
 
-`1RB 1LE  0RC 0RC  0RD 1RC  1LD 1LA  0LB 0RE`
+`1RB1LE_0RC0RC_0RD1RC_1LD1LA_0LB0RE`
 
 which quasihalts on step:
 
@@ -88,7 +88,7 @@ Here is the 1 top 20 machine I found so far which does something slightly more c
 |  D  | 0RE | 0RD |
 |  E  | 1LB | 1RE |
 
-`1RB 1RD  1LC 1LB  1LD 1RA  0RE 0RD  1LB 1RE`
+`1RB1RD_1LC1LB_1LD1RA_0RE0RD_1LB1RE`
 
 It quasihalts at step 94418964659944351442398224758 (>9.4 × 10<sup>28</sup>), blanks the tape at step 12250514892052349453616935044134 (>1.2 × 10<sup>31</sup>) and then enters into what Brady called "Christmas Tree" Recurrence. Explicitly:
 

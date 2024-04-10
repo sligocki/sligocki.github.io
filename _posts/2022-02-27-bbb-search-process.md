@@ -36,6 +36,8 @@ The simplest type of infinite recurrence is a type I will call "Chain Recurrence
 |  A  | 1RB | 2LA | 1RA | 1LB |
 |  B  | 0LB | 2RB | 3RB | 1LA |
 
+`1RB2LA1RA1LB_0LB2RB3RB1LA`
+
 At step 205,770,076,433,044,242,247,860 it is in configuration:
 
 <samp>
@@ -56,6 +58,8 @@ In order to describe partial recurrence, I will first define what I'll call "com
 | :-: | :-: | :-: | :-: | :-: | :-: |
 |  A  | 1RB | 0RB | 3LB | 2LB | 2LA |
 |  B  | 2LA | 1LB | 3RB | 4RA | 4RB |
+
+`1RB0RB3LB2LB2LA_2LA1LB3RB4RA4RB`
 
 starting at step 14138899753662763639604 is in configuration
 
@@ -80,6 +84,8 @@ it would repeat forever (with period 2). This is the essence of partial/Lin recu
 |  A  | 1RB | 1RB |
 |  B  | 1LC | 0RB |
 |  C  | 0LA | 1LA |
+
+`1RB1RB_1LC0RB_0LA1LA`
 
 <samp>
 0: ... (B1) 1 1 0<sup>∞</sup><br>
@@ -121,6 +127,8 @@ But even simpler is the situation where a PA-CTR increases all exponents. In tha
 |  C  | 1LD | 1RA |
 |  D  | 0RE | 0RD |
 |  E  | 1LB | 1RE |
+
+`1RB1RD_1LC1LB_1LD1RA_0RE0RD_1LB1RE`
 
 at step 12250514892052349453616935044134 (>1.2 × 10<sup>31</sup>) it is on a blank tape in state D:
 

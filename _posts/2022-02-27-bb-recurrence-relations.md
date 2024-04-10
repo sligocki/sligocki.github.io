@@ -8,6 +8,8 @@ While analyzing the behavior of the latest `BBB(3, 3)` champion, I found that I 
 
 ## The Machine
 
+`1RB0LB1LA_2LC2LB2LB_2RC2RA0LC` in [Standard Text format]({% post_url 2022-10-09-standard-tm-format %})
+
 |     |  0  |  1  |  2  |
 | :-: | :-: | :-: | :-: |
 |  A  | 1RB | 0LB | 1LA |

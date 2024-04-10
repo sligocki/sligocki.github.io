@@ -16,6 +16,8 @@ As far as I know the name *Counter* was coined for these machines by Allen Brady
 
 Consider ([TM #11,004,366](https://bbchallenge.org/11004366) on bbchallenge.org):
 
+`1RB1LA_0LC0RB_0LD0LB_1RE---_1LE1LA`
+
 |     |  0  |  1  |
 | :-: | :-: | :-: |
 |  A  | 1RB | 1LA |
