@@ -891,3 +891,64 @@ Start:
 ```
 
 But this process doesn't show any sign of simplifying over time. There may be endlessly many rules like this ...
+
+## 2024
+### June 2024
+#### Coincidence Collatz
+
+`1RB1RD_0LC0RD_1LD1LC_1RA1LE_0RE0RF_1RZ0LC`
+
+Longest running halter of set of 9 halting TMs shared by @mxdys on 8 June 2024. <https://discord.com/channels/960643023006490684/1026577255754903572/1249137796778823760>
+
+This took Quick_Sim.py 12 hours and almost 5 billion simulator steps to solve!
+
+```
+1RB1RD_0LC0RD_1LD1LC_1RA1LE_0RE0RF_---0LC
+
+A(a, b, c) = 0^inf 11^a 01 11^b A> 1^c 0^inf
+
+A(a, b+1, c+2)  -->  A(a+2,   b,    c)
+
+A(a,   b,   0)  -->  A(  0,   a, 2b+3)
+A(a,   b,   1)  -->  A(  a, b+1,    0)
+A(a,   0, c+7)  -->  A(  2, a+2,    c)
+
+A(a,   0,   2)  -->  A(  0, a+1,    0)
+A(a,   0,   3)  -->  A(a+2,   0,    0)
+A(a,   0,   4)  -->   Halt(2a+5)  $ 11^a+2 00 1 Z> $
+A(a,   0,   5)  -->  A(  0, a+3,    0)
+A(a,   0,   6)  -->  A(  0, a+4,    0)
+
+@61: A(0, 0, 9) = $ 1 A> 1^9 $
+```
+
+The trick here is that this TM reduces both `b` and `c` at the same time. If one runs out enough before the other, then it continues, but only when the both "run out" at the same time (`b = 0` and `2 <= c < 7`) does it have a chance of halting. And then only 1 of 5 remainders leads to halt. Furthermore it gets very lucky and doesn't hit that 1 of 5 remainders until the 18th try!
+
+All iterations where `b = 0` and `2 <= c < 7`:
+
+```
+         36  A(         22,           0,           6)
+         61  A(         38,           0,           2)
+        100  A(         56,           0,           3)
+        431  A(        230,           0,           2)
+        709  A(        368,           0,           5)
+      4_115  A(      2_058,           0,           6)
+      5_987  A(      2_994,           0,           3)
+      6_060  A(      3_028,           0,           3)
+     16_028  A(      7_950,           0,           6)
+     27_428  A(     13_652,           0,           3)
+    322_000  A(    160_934,           0,           2)
+    944_198  A(    472_128,           0,           5)
+  1_778_129  A(    889_264,           0,           5)
+  5_695_317  A(  2_847_234,           0,           5)
+178_941_119  A( 89_468_770,           0,           5)
+305_476_095  A(152_733_912,           0,           3)
+585_453_777  A(292_712_846,           0,           4)
+Halted: Score: 585_425_697
+```
+
+Final config:
+
+```
+00^inf 01^1 11^292_712_847 10^1 (01) Z> 00^inf
+```
