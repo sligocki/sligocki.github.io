@@ -980,23 +980,108 @@ C(a+3, 2, c) -> 1^a 01^c+3 11 Z>
 
 It does one of these interesting Collatz Markov Chains where it only halts if `a>=3` and `b%3 = 2` and otherwise has a couple ways to reset `a <= 1`. But eventually after flipping that coin 62 times it finally halts.
 
-Many of the other top BB(6, 2, -1) TMs seem to behave similarly (at least judging by the identical scores!):
+```
+          0  A(          0,           1,           0)
+          1  A(          0,           0,           1)
+          2  A(          1,           3,           0)
+          3  A(          2,           5,           0)
+          4  A(          1,          11,           0)
+          5  A(          1,          18,           0)
+          6  A(          2,          25,           0)
+          7  A(          0,           2,          17)
+          8  A(          1,          38,           0)
+          9  A(          1,          54,           0)
+         10  A(          2,          73,           0)
+         11  A(          0,           2,          49)
+         12  A(          1,         102,           0)
+         13  A(          2,         137,           0)
+...
+         58  A(          3,   1_470_157,           0)
+         59  A(          0,           3,     980_105)
+         60  A(          1,   1_960_215,           0)
+         61  A(          2,   2_613_621,           0)
+         62  A(          3,   3_484_829,           0)
+Halted:           62    2_323_223
+```
+
+Most of the other top BB(6, 2, -1) TMs are closely related and seem to harness basically the same process judging by the scores being all equal.
 
 ```
-grep -- --- Machines/bb/6x2.txt
-1RB0RC_1LC1LF_1RD0LB_1RZ0LE_---1RA_1LB0RE Halt ~10^13.2 4_059_761
-1RB0RC_1LC1LE_1RD0LB_1RZ1RB_1LB0RF_---1RA Halt ~10^13.2 4_059_761
-1RB1RA_1LC1RF_1RE1LD_1LC1LB_---0RA_1RZ0LE Halt ~10^13.3 2_323_223
-1RB1RA_1LC1RF_1RE1LD_0RD1LB_---0RA_1RZ0LE Halt ~10^13.4 2_323_223
-1RB1RE_1LC1RA_---0LD_1LE1LD_1RB1LF_1RZ0RC Halt ~10^13.3 2_323_223
-1RB1LF_1LC1RE_---0LD_1LA1LD_1RB1RA_1RZ0RC Halt ~10^13.3 2_323_223
-1RB1LF_1LC1RE_---0LD_1LA1LD_0LE1RA_1RZ0RC Halt ~10^13.4 2_323_223
-1RB1RA_1LC0RF_1RE1LD_1LC1LB_---0RA_1RZ1RB Halt ~10^13.1 2_323_222
-1RB0LF_1LC1RE_---0LD_1LE1LD_1RB1RA_1RZ1LA Halt ~10^13.1 2_323_222
-1RB1RA_1LC0RF_1RE1LD_0RD1LB_---0RA_1RZ1RB Halt ~10^13.3 2_323_222
-1RB1RE_1LC1RA_---0LD_1LE1LD_1RB0LF_1RZ1LE Halt ~10^13.1 2_323_222
-1RB1RA_1LC1LE_1RD1LB_---0RA_1LC0RF_1RZ1RE Halt ~10^13.1 2_323_222
-1RB0LF_1LC1RE_---0LD_1LA1LD_1RB1RA_1RZ1LA Halt ~10^13.1 2_323_222
-1RB1RE_1LC1RA_---0LD_1LA1LD_1RB0LF_1RZ1LE Halt ~10^13.1 2_323_222
-1RB0LF_1LC1RE_---0LD_1LA1LD_0LE1RA_1RZ1LA Halt ~10^13.3 2_323_222
+1RB1RA_1LC1RF_1RE1LD_0RD1LB_---0RA_---0LE Halt 24_673_582_891_560 2_323_223
+  B: 1RB1LF_1LC1RE_---0LD_1LA1LD_0LE1RA_---0RC Halt ~10^13.4 2_323_223
+
+  D0->1LC: 1RB1RA_1LC1RF_1RE1LD_1LC1LB_---0RA_---0LE Halt ~10^13.3 2_323_223
+    B: 1RB1LF_1LC1RE_---0LD_1LA1LD_1RB1RA_---0RC Halt ~10^13.3 2_323_223
+    D: 1RB1RE_1LC1RA_---0LD_1LE1LD_1RB1LF_---0RC Halt ~10^13.3 2_323_223
+  
+  B1->0RF F1->1RB: 1RB1RA_1LC0RF_1RE1LD_0RD1LB_---0RA_---1RB Halt ~10^13.3 2_323_222
+    B: 1RB0LF_1LC1RE_---0LD_1LA1LD_0LE1RA_---1LA Halt ~10^13.3 2_323_222
+
+    D0->1LC: 1RB1RA_1LC0RF_1RE1LD_1LC1LB_---0RA_---1RB Halt ~10^13.1 2_323_222
+      B: 1RB0LF_1LC1RE_---0LD_1LA1LD_1RB1RA_---1LA Halt ~10^13.1 2_323_222
+        D0->1LE: 1RB0LF_1LC1RE_---0LD_1LE1LD_1RB1RA_---1LA Halt ~10^13.1 2_323_222
+          1RB1RA_1LC1LE_1RD1LB_---0RA_1LC0RF_---1RE Halt ~10^13.1 2_323_222
+          1RB1RE_1LC1RA_---0LD_1LA1LD_1RB0LF_---1LE Halt ~10^13.1 2_323_222
+      D: 1RB1RE_1LC1RA_---0LD_1LE1LD_1RB0LF_---1LE Halt ~10^13.1 2_323_222
+
+```
+
+#### BB(6, 2, -1) Score Champ
+
+BB6 (with one unfilled transition) score champion: https://bbchallenge.org/1RB0RC_1LC1LF_1RD0LB_---0LE_---1RA_1LB0RE
+
+```
+1RB0RC_1LC1LF_1RD0LB_---0LE_---1RA_1LB0RE
+
+Steps:    ~10^13.15788  =  14_384_000_997_114
+Nonzeros: 4_059_761  =  4_059_761
+
+A(a, b, c) = $ 01^a A> 1^b 0 1^c $
+
+A(a, b+3, c) -> A(a+4, b, c)  if a >= 1
+
+A(a, 0, 0) -> A(2, 2a-1, 1)   if a >= 1
+A(a, 0, c+1) -> A(a+1, c, 0)
+A(a, 2, c) -> A(2, 2a+5, c+1)
+
+A(a, 1, 0) -> Halt(a+2)
+A(a, 1, 1) -> A(2, 2a+1, 1)
+A(a, 1, 2) -> A(2, 2a+3, 1)
+A(a, 1, 3) -> Halt(a+4)
+A(a, 1, c+4) -> A(a+5, 0, c)
+
+@20: A(2, 1, 2)
+```
+
+```
+   0  A(          2,           1,           2)
+   1  A(          2,           7,           1)
+   2  A(          2,          21,           1)
+   3  A(         31,           0,           0)
+   4  A(          2,          61,           1)
+   5  A(          2,         165,           1)
+   6  A(        223,           0,           0)
+   7  A(          2,         445,           1)
+   8  A(          2,       1_189,           1)
+   9  A(          2,       3_173,           1)
+  10  A(          2,       8_465,           2)
+  11  A(          2,      22_577,           3)
+  12  A(          2,      60_209,           4)
+  13  A(          2,     160_561,           5)
+  14  A(    214_087,           0,           1)
+  15  A(    214_088,           0,           0)
+  16  A(          2,     428_175,           1)
+  17  A(    570_903,           0,           0)
+  18  A(          2,   1_141_805,           1)
+  19  A(          2,   3_044_817,           2)
+  20  A(  4_059_759,           1,           0)
+Halted:           20    4_059_761
+```
+
+This one has a sibling too:
+
+```
+1RB0RC_1LC1LF_1RD0LB_---0LE_---1RA_1LB0RE Halt 14_384_000_997_114 4_059_761
+  D1->1RB (E <-> F):
+    1RB0RC_1LC1LE_1RD0LB_---1RB_1LB0RF_---1RA Halt 14_383_991_253_724 4_059_761
 ```
