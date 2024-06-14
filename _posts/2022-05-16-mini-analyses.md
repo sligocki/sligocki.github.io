@@ -535,7 +535,7 @@ Group B:
 
 Group C:
   1RB2LB2LA_1LA2RC1LB_---2RB0LB
-1RB1LA2LA_1LA2RC1LB_---2RB0LB
+  1RB1LA2LA_1LA2RC1LB_---2RB0LB
 ```
 
 ##### Group A
@@ -951,4 +951,50 @@ Final config:
 
 ```
 00^inf 01^1 11^292_712_847 10^1 (01) Z> 00^inf
+```
+
+#### BB(6, 2, -1) Step Champ
+
+AFAICT this is the current BB6 (with one unfilled transition) step champion: https://bbchallenge.org/1RB1RA_1LC1RF_1RE1LD_0RD1LB_---0RA_1RZ0LE
+
+```
+# 1RB1RA_1LC1RF_1RE1LD_0RD1LB_---0RA_1RZ0LE
+#
+# Steps:    ~10^13.39223  =  24_673_582_891_560
+# Nonzeros: 2_323_223  =  2_323_223
+#
+# C(a, b, c) = $ 1^a 0 1^b <C 1^2c+1 $
+#
+# C(a, b+3, c) -> C(a, b, c+2)
+#
+# C(a, 0, c) -> C(a+1, 2c+1, 0)
+# C(a, 1, c) -> C(0, a, c+1)
+#
+# C(0, 2, c) -> C(1, 2c+4, 0)
+# C(1, 2, c) -> C(1, 2c+6, 0)
+# C(2, 2, c) -> C(1, 2c+7, 0)
+# C(a+3, 2, c) -> 1^a 01^c+3 11 Z>
+```
+
+It does one of these interesting Collatz Markov Chains where it only halts if `a>=3` and `b%3 = 2` and otherwise has a couple ways to reset `a <= 1`. But eventually after flipping that coin 62 times it finally halts.
+
+Many of the other top BB(6, 2, -1) TMs seem to behave similarly (at least judging by the identical scores!):
+
+```
+grep -- --- Machines/bb/6x2.txt
+1RB0RC_1LC1LF_1RD0LB_1RZ0LE_---1RA_1LB0RE Halt ~10^13.2 4_059_761
+1RB0RC_1LC1LE_1RD0LB_1RZ1RB_1LB0RF_---1RA Halt ~10^13.2 4_059_761
+1RB1RA_1LC1RF_1RE1LD_1LC1LB_---0RA_1RZ0LE Halt ~10^13.3 2_323_223
+1RB1RA_1LC1RF_1RE1LD_0RD1LB_---0RA_1RZ0LE Halt ~10^13.4 2_323_223
+1RB1RE_1LC1RA_---0LD_1LE1LD_1RB1LF_1RZ0RC Halt ~10^13.3 2_323_223
+1RB1LF_1LC1RE_---0LD_1LA1LD_1RB1RA_1RZ0RC Halt ~10^13.3 2_323_223
+1RB1LF_1LC1RE_---0LD_1LA1LD_0LE1RA_1RZ0RC Halt ~10^13.4 2_323_223
+1RB1RA_1LC0RF_1RE1LD_1LC1LB_---0RA_1RZ1RB Halt ~10^13.1 2_323_222
+1RB0LF_1LC1RE_---0LD_1LE1LD_1RB1RA_1RZ1LA Halt ~10^13.1 2_323_222
+1RB1RA_1LC0RF_1RE1LD_0RD1LB_---0RA_1RZ1RB Halt ~10^13.3 2_323_222
+1RB1RE_1LC1RA_---0LD_1LE1LD_1RB0LF_1RZ1LE Halt ~10^13.1 2_323_222
+1RB1RA_1LC1LE_1RD1LB_---0RA_1LC0RF_1RZ1RE Halt ~10^13.1 2_323_222
+1RB0LF_1LC1RE_---0LD_1LA1LD_1RB1RA_1RZ1LA Halt ~10^13.1 2_323_222
+1RB1RE_1LC1RA_---0LD_1LA1LD_1RB0LF_1RZ1LE Halt ~10^13.1 2_323_222
+1RB0LF_1LC1RE_---0LD_1LA1LD_0LE1RA_1RZ1LA Halt ~10^13.3 2_323_222
 ```
