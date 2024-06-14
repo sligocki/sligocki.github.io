@@ -958,22 +958,24 @@ Final config:
 AFAICT this is the current BB6 (with one unfilled transition) step champion: https://bbchallenge.org/1RB1RA_1LC1RF_1RE1LD_0RD1LB_---0RA_1RZ0LE
 
 ```
-# 1RB1RA_1LC1RF_1RE1LD_0RD1LB_---0RA_1RZ0LE
-#
-# Steps:    ~10^13.39223  =  24_673_582_891_560
-# Nonzeros: 2_323_223  =  2_323_223
-#
-# C(a, b, c) = $ 1^a 0 1^b <C 1^2c+1 $
-#
-# C(a, b+3, c) -> C(a, b, c+2)
-#
-# C(a, 0, c) -> C(a+1, 2c+1, 0)
-# C(a, 1, c) -> C(0, a, c+1)
-#
-# C(0, 2, c) -> C(1, 2c+4, 0)
-# C(1, 2, c) -> C(1, 2c+6, 0)
-# C(2, 2, c) -> C(1, 2c+7, 0)
-# C(a+3, 2, c) -> 1^a 01^c+3 11 Z>
+1RB1RA_1LC1RF_1RE1LD_0RD1LB_---0RA_1RZ0LE
+
+Steps:    ~10^13.39223  =  24_673_582_891_560
+Nonzeros: 2_323_223  =  2_323_223
+
+C(a, b, c) = $ 1^a 0 1^b <C 1^2c+1 $
+
+C(a, b+3, c) -> C(a, b, c+2)
+
+C(a, 0, c) -> C(a+1, 2c+1, 0)
+C(a, 1, c) -> C(0, a, c+1)
+
+C(0, 2, c) -> C(1, 2c+4, 0)
+C(1, 2, c) -> C(1, 2c+6, 0)
+C(2, 2, c) -> C(1, 2c+7, 0)
+C(a+3, 2, c) -> 1^a 01^c+3 11 Z>
+
+@2: C(0, 1, 0)
 ```
 
 It does one of these interesting Collatz Markov Chains where it only halts if `a>=3` and `b%3 = 2` and otherwise has a couple ways to reset `a <= 1`. But eventually after flipping that coin 62 times it finally halts.
