@@ -7,6 +7,8 @@ tags: busy-beaver skelet
 
 > Updated 6 Aug 2023: Maja Kądziołka [verified this result in Coq](https://discuss.bbchallenge.org/t/skelet-1-is-a-translated-cycler-coq-agrees/166)! In the process she found several transcription errors in this post, which have been fixed.
 
+> Updated 25 Nov 2024: @hipparcos found a missing transition rule (`>PDR`) which has now been added.
+
 At the end of my [original Skelet \#1 post]({% post_url 2023-02-25-skelet-1-wip %}), I listed my ideas on ways to move forward. Third on the list was working on an accelerated simulator. Pavel Kropitz built a custom simulator for this TM using the Counter Notation (with Parity Change) I mentioned in that article. They also added Counter acceleration using the rule I listed in that article and I added @uni-cycle acceleration. Together, all of these custom optimizations, we were able to run the simulation long enough that it reached an infinite cycle! So we believe we have demonstrated that this TM is infinite (in fact, that it is a [Translated Cycler](https://discuss.bbchallenge.org/t/decider-translated-cyclers/34) / is Lin Recurrent).
 
 But since this requires running our custom simulator over $$2^{26}$$ (over 60M) simulator steps and no other existing simulator is able to run nearly this long, I feel somewhat reluctant to claim certainty that we do not have a bug in our simulation! In order to confirm this TMs behavior it would be great if someone else could independently implement a simulator so that we could compare the results. Towards that end, I will provide all the theory that I think anyone would need to implement such an accelerated simulator.
@@ -51,7 +53,7 @@ Simulating this TM will have a **lot** of `x`s on the tape. Instead of represent
 
 We still have not found any way to exhaustively list all rules starting from arbitrary configs in Extended Counter Notation because collisions can be quite complicated depending on the exact details of their surroundings. However, it appears that the following rules are sufficient to simulate this TM for all time (in practice). We came upon this list by a bit of trial and error:
 
-$$ \begin{array}{l}
+$$ \begin{array}{lllccrll}
     &   & x^n & < & \to & < & x^n   &   \\
     &   & D   & < & \to & < & D     &   \\
     &   & C   & < & \to & < & C     &   \\
@@ -88,6 +90,7 @@ C_0 & > & C   &   & \to &   & G_0   & > \\
     & >P & DP &   & \to &   & C_1 D     & >  \\
     & >P & DDx &  & \to &   & C_2 C_1 D & >  \\
     & >P & DCx &  & \to &   & G_1 D     & >P \\
+    & >P & DR &   & \to & C_1 < & P R &   \\
 \end{array} $$
 
 You can begin simulating in config $$ L C_1 > R $$ which the TM enters at step 19.
