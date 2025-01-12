@@ -208,6 +208,8 @@ As previously, this is only a suffix of the tape. It allows and ignores anything
 
 ## Stats
 
+> Update 9 Jan 2025: Discord user @hipparcos computed the preperiod (cycle start time) as $$~4.29 \times 10^{51}$$ ([Discord](https://discord.com/channels/960643023006490684/1075378436404678707/1326803979778396211)). The minimum preperiod is not yet known exactly, but it appears to be accurate to about 40 decimal places.
+
 Here are some stats about the Perpetual Skelet Cycle:
 
   * Cycle Period: 8,468,569,863 base TM steps (1357 simulator steps).
