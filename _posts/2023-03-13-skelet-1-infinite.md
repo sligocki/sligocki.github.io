@@ -208,7 +208,7 @@ As previously, this is only a suffix of the tape. It allows and ignores anything
 
 ## Stats
 
-> Update 9 Jan 2025: Discord user @hipparcos computed the preperiod (cycle start time) as $$~4.29 \times 10^{51}$$ ([Discord](https://discord.com/channels/960643023006490684/1075378436404678707/1326803979778396211)). The minimum preperiod is not yet known exactly, but it appears to be accurate to about 40 decimal places.
+> Update 13 Jan 2025: Discord user @hipparcos computed the preperiod (cycle start time) as $$~5.42 \times 10^{51}$$ ([Discord](https://discord.com/channels/960643023006490684/1075378436404678707/1328263736686936066)).
 
 Here are some stats about the Perpetual Skelet Cycle:
 
