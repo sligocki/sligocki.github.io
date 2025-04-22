@@ -134,7 +134,7 @@ In this model, after every checkpoint, there are only two options: reset or halt
 $$ P(n) = 1 - \frac{2}{3} P(n-1) $$
 
 This recurrence has its only fixed point at $$\frac{3}{5}$$ and if $$P(n) = \frac{3}{5} + \epsilon$$ then $$P(n+1) = \frac{3}{5} - \frac{2}{3} \epsilon$$ so the probabilities approach this fixed point exponentially quickly: $$
-|P(n) - \frac{3}{5}| = \frac{2}{5} \left(\frac{2}{3}\right)^n$$. This is already tiny by $$n=20$$ ($$\left|P(14) - \frac{3}{5}\right| < 0.0002$$), by the time you get to $$n \approx 10^{2901.92}$$ the discrepency is minute.
+|P(n) - \frac{3}{5}| = \frac{2}{5} \left(\frac{2}{3}\right)^n$$. This is already tiny by $$n=20$$ ($$\left|P(14) - \frac{3}{5}\right| < 0.0002$$), by the time you get to $$n \approx 10^{2901.92}$$ the discrepancy is minute.
 
 Therefore, starting at any large checkpoint, there is a $$\frac{1}{5}$$ chance of halting this iteration ($$\frac{3}{5}$$ chance of reaching $$a=1$$ and $$\frac{1}{3}$$ chance to halt if reaching $$a=1$$) and a $$\frac{4}{5}$$ chance of resetting. And thus, the chance that it resets at least $$r$$ times starting from a given checkpoint is $$\left(\frac{4}{5}\right)^r$$
 
@@ -165,7 +165,7 @@ $$ b_{r+3} > 10 \uparrow\uparrow (r+2.5) $$
 
 and when it halts there will be $$> 10 \uparrow\uparrow (r+3.5)$$ ones on the tape. The current champion writes $$< 10 \uparrow\uparrow 15.60466$$ ones, so if $$r \ge 13$$, Lucy's Moonlight will beat it.[^precise-resets]
 
-Therefore, in this probablistic model, knowing that it reaches checkpoint $$C(> 8 \times 10^{2901}, 8)$$, the chance that Lucy's Moonlight will write more ones than than Pavel's current champion is:
+Therefore, in this probabilistic model, knowing that it reaches checkpoint $$C(> 8 \times 10^{2901}, 8)$$, the chance that Lucy's Moonlight will write more ones than than Pavel's current champion is:
 
 $$ \left(\frac{4}{5}\right)^{13} \approx 5.50\% $$
 
