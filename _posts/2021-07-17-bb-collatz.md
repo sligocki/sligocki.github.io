@@ -29,7 +29,7 @@ Here, each line is the tape at the step number specified at left. The upper-case
 
 ## Tape Compression
 
-From either of those simulations we can see that it's performing a sort of two-stage process, moving back and forth from the right side to the middle repeatedly, each iteration moving that middle point towards the left and eventually when it reaches the left reseting in some way and starting over again. This pattern is pretty common among Busy Beaver candidates.
+From either of those simulations we can see that it's performing a sort of two-stage process, moving back and forth from the right side to the middle repeatedly, each iteration moving that middle point towards the left and eventually when it reaches the left resetting in some way and starting over again. This pattern is pretty common among Busy Beaver candidates.
 
 The direct simulations above are great for observing behavior, but become a bit tedious when trying to analyze that behavior. Instead, we often find it useful to use [run-length encoding](https://en.wikipedia.org/wiki/Run-length_encoding) on the tape (I first learned about this technique from [Heiner Marxen's excellent article about Macro Machines](http://turbotm.de/~heiner/BB/macro.html#6)). Consider the last line in the image above (Visual_Simulator output at step 71). If we were to write that configuration out in text we could write it as:
 

@@ -178,7 +178,7 @@ Note: That these exponents can get really big. In our simulation we saw examples
 
 ## Perpetual Skelet Cycle
 
-Ah, finally. Once you have implemented custom tape encoding, counter accelaration and generalized @uni-cycle acceleration. You must simply run your simulation for 30-ish million simulator steps and you will reach the _Perpetual Skelet Cycle_, a cycle that never ends!
+Ah, finally. Once you have implemented custom tape encoding, counter acceleration and generalized @uni-cycle acceleration. You must simply run your simulation for 30-ish million simulator steps and you will reach the _Perpetual Skelet Cycle_, a cycle that never ends!
 
 Let
 

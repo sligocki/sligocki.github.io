@@ -149,7 +149,7 @@ $$ = 2 (a + 7)^2 \sum_{i=0}^{k-1} 4^i - 13 (a + 7) \sum_{i=0}^{k-1} 2^i + 20 \su
 
 $$ = 2 (a + 7)^2 \frac{4^k - 1}{3} - 13 (a + 7) (2^k - 1) + 20 k $$
 
-Well that's quite a mouthfull! Let's give it a shorthand name:
+Well that's quite a mouthful! Let's give it a shorthand name:
 
 $$ B(a, k) = \frac{2}{3} (a + 7)^2 (4^k - 1) - 13 (a + 7) (2^k - 1) + 20 k$$
 

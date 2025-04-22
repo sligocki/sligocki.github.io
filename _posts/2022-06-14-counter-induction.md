@@ -141,7 +141,7 @@ The downside of these sorts of strict decompositions is that there turn out to b
 
 Tape compression, chain steps and our current automated proof systems have generally been powerful enough to prove all variations of Christmas Trees without the need for variations-specific code. In my opinion, it has made proving Christmas Trees much simpler and less error prone by producing a single general system which happens to work with all of these variations.
 
-I would like to see something similar happen with automating counter proving and my hope is that it is possible by following the pattern I layed out above: Running an *Inductive Proof* that allows applying smaller versions of the rule being proven itself. My hope is that this would be general enough to cover all variations of counters without the need to each variation to have it's own decomposition and proof.
+I would like to see something similar happen with automating counter proving and my hope is that it is possible by following the pattern I laid out above: Running an *Inductive Proof* that allows applying smaller versions of the rule being proven itself. My hope is that this would be general enough to cover all variations of counters without the need to each variation to have it's own decomposition and proof.
 
 
 ## Attribution

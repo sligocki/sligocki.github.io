@@ -395,4 +395,4 @@ Do any of you know of any better results in this range? Let me know in the new c
 
 ## Footnotes
 
-[^green64]: Milton W. Green. "A Lower Bound on Rado's Sigma Function for Binary Turing Machines", _Preceedings of the IEEE Fifth Annual Symposium on Switching Circuits Theory and Logical Design_, 1964, pages 91–94, doi: [10.1109/SWCT.1964.3](https://doi.org/10.1109%2FSWCT.1964.3).
+[^green64]: Milton W. Green. "A Lower Bound on Rado's Sigma Function for Binary Turing Machines", _Proceedings of the IEEE Fifth Annual Symposium on Switching Circuits Theory and Logical Design_, 1964, pages 91–94, doi: [10.1109/SWCT.1964.3](https://doi.org/10.1109%2FSWCT.1964.3).

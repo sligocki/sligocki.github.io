@@ -88,7 +88,7 @@ $$\begin{array}{lcl}
   M(2a) \to \text{Halt} & \iff & B(a) \to \text{Halt} \\
 \end{array}$$
 
-But wait, there's more! In fact, there is actually a giant clump of [19 distinct BB(5) TMs](https://wiki.bbchallenge.org/wiki/BB(5)#Enumeration) that run > 10 million steps and all leave between 4096-4098 marks on the tape!  Pascal analyzed the other Σ(5) champion (`1RB1RA_1LC1LB_1RA1LD_1RA1LE_1RZ0LC`) in his 1993 paper and showed that it simulates the exact same function. I haven't analyzed the rest of them, but I'd gues that they are all taking advantage of equivalent Collatz-like trajectories as well (since they are clumped so tightly).
+But wait, there's more! In fact, there is actually a giant clump of [19 distinct BB(5) TMs](https://wiki.bbchallenge.org/wiki/BB(5)#Enumeration) that run > 10 million steps and all leave between 4096-4098 marks on the tape!  Pascal analyzed the other Σ(5) champion (`1RB1RA_1LC1LB_1RA1LD_1RA1LE_1RZ0LC`) in his 1993 paper and showed that it simulates the exact same function. I haven't analyzed the rest of them, but I'd guess that they are all taking advantage of equivalent Collatz-like trajectories as well (since they are clumped so tightly).
 
 
 ### BBB(4) Champion
@@ -192,7 +192,7 @@ $$\begin{array}{l}
   B(792)  & \to & B(1323) & \to & B(2208) & \to & B(3683) & \to & B(6142)  & \to & \text{HALT}
 \end{array}$$
 
-This avoids the halt transition 14 times before finally halting. If we treat each transition as having a uniform random chance of hitting each of the 3 rules, then the chance of avoiding halt 14 times in a row is $$(\frac{2}{3})^{14} \approx 0.0034 \approx \frac{1}{300}$$. So, it seems like this is pretty rare. Perhaps rare enough that any TM which can (just barely) simulate it outcompetes all others of it's size?
+This avoids the halt transition 14 times before finally halting. If we treat each transition as having a uniform random chance of hitting each of the 3 rules, then the chance of avoiding halt 14 times in a row is $$(\frac{2}{3})^{14} \approx 0.0034 \approx \frac{1}{300}$$. So, it seems like this is pretty rare. Perhaps rare enough that any TM which can (just barely) simulate it out-competes all others of it's size?
 
 
 ## Footnotes
