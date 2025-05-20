@@ -372,6 +372,8 @@ $$\begin{array}{lcrcl}
 
 ## Green's Champions
 
+> Update: As of 13 May 2025, none of Green's machines remain champions due to Pavel Kropitz's discovery of [an Ackermann-level BB(7) TM](https://wiki.bbchallenge.org/wiki/1RB0RA_1LC1LF_1RD0LB_1RA1LE_1RZ0LC_1RG1LD_0RG0RF) demonstrating $$\Sigma(7) > 2 \uparrow^{11} 2 \uparrow^{11} 3$$.
+
 When Green published his paper in 1964, all $$BB_n$$ for $$n \ge 6$$ were Busy Beaver champions. However, over the years several have been slowly chipped away. According to Pascal Michel's [Historical survey of Busy Beavers](https://bbchallenge.org/~pascal.michel/ha.html):
 
 * $$BB_6$$ was surpassed in 1972 by Donald Lynn: $$\Sigma(6) \ge 42$$
