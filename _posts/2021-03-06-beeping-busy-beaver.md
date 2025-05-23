@@ -20,7 +20,7 @@ I was quite shocked to discover that such a simple modification to the Turing Ma
 
 ## Detecting Quasihalting
 
-The first thing to note is that quasihalting is quite a bit more complicated that halting. While the question of whether a TM **will** halt is undecidable, the question of whether it **has** halted is extremely easy: is it in the Halt state? Deciding whether a TM has quasihalted, on the other hand is no simple task. It amounts to proving that the TM will never again reach a certain state. In fact, detecting whether a TM has quasihalted yet is an undecidable problem itself. We can see that by noting that if we had a reliable method for detecting that we had quasihalted, we could use it to solve the classic halting problem! Specifically, consider any arbitrary TM X, say:<sup id="t2">[2](#f2)</sup>
+The first thing to note is that quasihalting is quite a bit more complicated than halting. While the question of whether a TM **will** halt is undecidable, the question of whether it **has** halted is extremely easy: is it in the Halt state? Deciding whether a TM has quasihalted, on the other hand is no simple task. It amounts to proving that the TM will never again reach a certain state. In fact, detecting whether a TM has quasihalted yet is an undecidable problem itself. We can see that by noting that if we had a reliable method for detecting that we had quasihalted, we could use it to solve the classic halting problem! Specifically, consider any arbitrary TM X, say:<sup id="t2">[2](#f2)</sup>
 
   |     |  0  |  1  |
   | :-: | :-: | :-: |
